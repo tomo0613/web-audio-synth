@@ -4,9 +4,11 @@ import { PlayCircleOutlined, StopCircleOutlined, VolumeDown, VolumeUp } from '@m
 import { IconButton, Slider, Stack } from '@mui/material';
 import { useState } from 'react';
 import { AudioAnalyserDisplay } from './AudioAnalyserDisplay';
-import { context } from "../core/context";
-import { testTrack } from "../core/testTrack";
 import { theme } from './theme';
+
+import { testTrack } from "../core/testTrack";
+import { context } from "../core/context";
+import { AmpEnvelopeControl } from './AmpEnvelopeControl';
 
 export const App = () => {
     const [volume, setVolume] = useState(context.gainNode.gain.value);
@@ -43,6 +45,7 @@ export const App = () => {
                 </IconButton>
             </Stack>
             <AudioAnalyserDisplay />
+            <AmpEnvelopeControl />
         </ThemeProvider>
     )
 };

@@ -19,9 +19,9 @@ export class SoundTrack {
         let i = 0;
 
         this.sounds.forEach((sound) => {
-            i++;
-
             sound.play(now + i * 1);
+
+            i += 1;
         });
     }
 

@@ -26,4 +26,6 @@ export const context = {
     tracks,
     play,
     stop,
+
+    bpm: 120,
 };

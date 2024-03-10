@@ -1,0 +1,1 @@
+const stepDuration = 0;

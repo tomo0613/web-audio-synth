@@ -1,10 +1,14 @@
-export class SoundEnvelope {
+import { context } from "./context";
+
+export class AmpEnvelope {
     attack = 0;
     decay = 0;
     sustain = 1;
     release = 0;
 
-    apply(startTime: number, length: number, gainNode: GainNode) {
+    init(startTime: number, length: number) {
+        const gainNode = context.instance.createGain();
+
         const attackDuration = this.attack; // * MAX_TIME
         const attackEndTime = startTime + attackDuration;
         const decayDuration = this.decay; // * MAX_TIME
@@ -22,6 +26,7 @@ export class SoundEnvelope {
         gainNode.gain.setValueAtTime(gainNode.gain.value, releaseTime);
         // release
         gainNode.gain.linearRampToValueAtTime(0, releaseEndTime);
-    }
 
+        return gainNode;
+    }
 }

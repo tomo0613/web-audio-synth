@@ -1,4 +1,4 @@
-import { SoundEnvelope } from "./SoundEnvelope";
+import { AmpEnvelope } from "./SoundEnvelope";
 import { context } from "./context";
 
 interface ISoundProps {
@@ -8,46 +8,45 @@ interface ISoundProps {
 }
 
 export class Sound {
-    oscillator = context.instance.createOscillator();
-    envelopes = [new SoundEnvelope()];
+    envelopes = {
+        amp: new AmpEnvelope(),
+        pitch: null,
+    };
     length: number;
+    frequency: number;
+    oscillator: OscillatorNode | null = null;
+    waveForm: OscillatorType;
     
-    constructor({ length = 0.1, frequency = 440, waveForm = "sine" }: ISoundProps) {
-        this.oscillator.connect(context.gainNode);
-
+    constructor({ length = 1, frequency = 440, waveForm = "sine" }: ISoundProps) {
         this.length = length;
         this.frequency = frequency;
         this.waveForm = waveForm;
     }
 
-    set frequency(value: number) {
-        this.oscillator.frequency.value = value;
-    }
+    private init() {
+        const oscillator = context.instance.createOscillator();
 
-    get frequency() {
-        return this.oscillator.frequency.value;
-    }
-
-    set waveForm(waveForm: OscillatorType) {
-        if (waveForm === 'custom') {
+        if (this.waveForm === 'custom') {
             throw new Error("ToDo implement customWave: PeriodicWave")
-            // this.oscillator.setPeriodicWave(customWave);
+            // oscillator.setPeriodicWave(customWave);
         } else {
-            this.oscillator.type = waveForm;
+            oscillator.type = this.waveForm;
         }
-    }
 
-    get waveForm() {
-        return this.oscillator.type;
+        oscillator.frequency.value = this.frequency;
+
+        this.oscillator = oscillator;
     }
 
     play(startTime: number) {
-        
-        console.log("play sound", { startTime, l: this.length });
-        
-        this.envelopes[0].apply(startTime, this.length, context.gainNode);
+        this.init();
 
-        this.oscillator.start();
+        const ampEnvelopeGain = this.envelopes.amp.init(startTime, this.length);
+
+        this.oscillator.connect(ampEnvelopeGain);
+        ampEnvelopeGain.connect(context.gainNode);
+        
+        this.oscillator.start(startTime);
     }
 
     stop() {
