@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { context } from "../core/context";
+import { context } from "@core/context";
 
 function initAnalyser(audioContext: AudioContext, gainNode: GainNode) {
     const analyser = audioContext.createAnalyser();

@@ -1,39 +1,29 @@
-import { useState } from "react";
 import { Box, Card, Slider, Stack, SxProps, Typography } from "@mui/material"
 
-import { context } from "../core/context";
+import type { AmpEnvelope } from "@core/SoundEnvelope";
+import { context } from "@core/context";
+import { useAmpEnvelopeState, ActionType } from "./useAmpEnvelopeState";
 
 const cardSx: SxProps = {
     width: "320px",
     p: 4,
 }
 
-
-
-const defaultState = {
-    attack: 0,
-    decay: 0,
-    sustain: 1,
-    release: 0,
-};
-
 export const AmpEnvelopeControl = () => {
-    const [attack, setAttack] = useState(defaultState.attack);
+    const [state, dispatch] = useAmpEnvelopeState();
 
     function handleChange(e: Event, value: number) {
-        const inputName = (e.target as HTMLInputElement).name;
-   
-        switch (inputName) {
-            case "attack":
-                setAttack(value);
-                break;
-        }
+        const key = (e.target as HTMLInputElement).name;
+
+        // ampEnvelope[key]
+
+        dispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }
 
     return (
         <Card sx={cardSx}>
             <Stack spacing={2}>
-                {Object.entries(defaultState).map(([key, value]) => (
+                {Object.entries(state).map(([key, value]) => (
                     <Box key={key}>
                         <Typography>
                             {key}

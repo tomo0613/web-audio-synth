@@ -5,8 +5,11 @@
         "target": "esnext",
         "jsx": "react-jsx",
         "outDir": "tsc_build",
-        "baseUrl": "./",
-        "paths": {},
+        "baseUrl": "src",
+        "paths": {
+            "@core/*": ["core/*"],
+            "@ui/*": ["ui/*"]
+        },
         "allowSyntheticDefaultImports": true
     },
     "include": [

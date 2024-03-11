@@ -1,6 +1,9 @@
 import type { Sound } from "./Sound";
 
+let i = 0;
+
 export class SoundTrack {
+    id = `SoundTrack_${i++}`;
     sounds: Set<Sound>;
 
     constructor(sounds: Sound[]) {

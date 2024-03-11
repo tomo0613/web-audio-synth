@@ -1,6 +1,8 @@
 import { AmpEnvelope } from "./SoundEnvelope";
 import { context } from "./context";
 
+let i = 0;
+
 interface ISoundProps {
     length?: number;
     frequency?: number;
@@ -8,6 +10,7 @@ interface ISoundProps {
 }
 
 export class Sound {
+    id = `Sound_${i++}`;
     envelopes = {
         amp: new AmpEnvelope(),
         pitch: null,
