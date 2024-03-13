@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+
 import type { AmpEnvelope } from "@core/SoundEnvelope";
 
 export enum ActionType {
@@ -6,14 +7,14 @@ export enum ActionType {
     setForm = "setForm",
 }
 
-export const defaultState = {
+export const ampEnvelopeDefaultState = {
     attack: 0,
     decay: 0,
     sustain: 0,
     release: 0,
 };
 
-type State = typeof defaultState;
+type State = typeof ampEnvelopeDefaultState;
 
 interface InitializeStateAction {
     type: ActionType.initializeForm;
@@ -47,5 +48,5 @@ export function useAmpEnvelopeState(): [State, React.Dispatch<Action>] {
             default:
                 throw new Error();
         }
-    }, defaultState);
+    }, ampEnvelopeDefaultState);
 }

@@ -19,7 +19,7 @@ export class AmpEnvelope {
         gainNode.gain.cancelScheduledValues(startTime);
         gainNode.gain.setValueAtTime(0, startTime);
         // attack
-        gainNode.gain.exponentialRampToValueAtTime(1, attackEndTime);
+        gainNode.gain.linearRampToValueAtTime(1, attackEndTime);
         // decay
         gainNode.gain.setTargetAtTime(this.sustain, attackEndTime, decayDuration);
         // sustain

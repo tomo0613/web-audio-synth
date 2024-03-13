@@ -1,12 +1,10 @@
-import { PlayCircleOutlined, StopCircleOutlined, VolumeDown, VolumeUp } from '@mui/icons-material';
 import { IconButton, Stack } from '@mui/material';
+import { PlayCircleOutlined, StopCircleOutlined } from '@mui/icons-material';
 
-import { testTrack } from "@core/testTrack";
 import { context } from "@core/context";
 
 export const PlayControl = () => {
     function play() {        
-        context.tracks[0] = testTrack;
         context.play()
     }
 
