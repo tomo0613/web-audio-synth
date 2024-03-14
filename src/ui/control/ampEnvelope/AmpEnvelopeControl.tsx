@@ -1,11 +1,11 @@
-import { Box, Card, Slider, Stack, SxProps, Typography } from "@mui/material"
+import { Box, Card, Slider, Stack, SxProps, Typography } from "@mui/material";
 
-import { ActionType } from "../../context/useAmpEnvelopeState";
 import { useUiContext } from "@ui/context/UiContext";
+import { ActionType } from "../../context/useAmpEnvelopeState";
 
 const cardSx: SxProps = {
     p: 4,
-}
+};
 
 export const AmpEnvelopeControl = () => {
     const { selectedSound, ampEnvelopeState, ampEnvelopeDispatch } = useUiContext();

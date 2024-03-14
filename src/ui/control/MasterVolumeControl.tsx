@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { VolumeDown, VolumeUp } from '@mui/icons-material';
-import { Slider, Stack } from '@mui/material';
 import { context } from "@core/context";
+import { VolumeDown, VolumeUp } from "@mui/icons-material";
+import { Slider, Stack } from "@mui/material";
+import { useState } from "react";
 
 export const MasterVolumeControl = () => {
     const [volume, setVolume] = useState(context.gainNode.gain.value);

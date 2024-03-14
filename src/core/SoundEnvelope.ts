@@ -2,8 +2,11 @@ import { context } from "./context";
 
 export class AmpEnvelope {
     attack = 0;
+
     decay = 0;
+
     sustain = 1;
+
     release = 0;
 
     init(startTime: number, length: number) {
@@ -15,7 +18,7 @@ export class AmpEnvelope {
         const releaseTime = startTime + length;
         const releaseDuration = this.release; // * MAX_TIME
         const releaseEndTime = releaseTime + releaseDuration;
-        
+
         gainNode.gain.cancelScheduledValues(startTime);
         gainNode.gain.setValueAtTime(0, startTime);
         // attack

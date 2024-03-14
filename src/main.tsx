@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import { App } from "./ui/App";
 
 const container = document.createElement("main");

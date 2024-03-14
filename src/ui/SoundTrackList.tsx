@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material"
+import { Stack } from "@mui/material";
 
 import { context } from "@core/context";
 import { SoundTrack } from "./SoundTrack";
@@ -6,9 +6,7 @@ import { SoundTrack } from "./SoundTrack";
 export const SoundTrackList = () => {
     return (
         <Stack>
-            {context.tracks.map((track) => (
-                <SoundTrack key={track.id} track={track} />
-            ))}
+            {context.tracks.map((track) => <SoundTrack key={track.id} track={track} />)}
         </Stack>
     );
 };

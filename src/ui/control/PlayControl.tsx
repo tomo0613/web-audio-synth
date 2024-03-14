@@ -1,15 +1,15 @@
-import { IconButton, Stack } from '@mui/material';
-import { PlayCircleOutlined, StopCircleOutlined } from '@mui/icons-material';
+import { PlayCircleOutlined, StopCircleOutlined } from "@mui/icons-material";
+import { IconButton, Stack } from "@mui/material";
 
 import { context } from "@core/context";
 
 export const PlayControl = () => {
-    function play() {        
-        context.play()
+    function play() {
+        context.play();
     }
 
     function stop() {
-        context.stop()
+        context.stop();
     }
 
     return (

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
-import { UiContext } from "./UiContext";
-import { ActionType, useAmpEnvelopeState,  } from "./useAmpEnvelopeState";
 import type { Sound } from "@core/Sound";
+import { UiContext } from "./UiContext";
+import { ActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [selectedSound, setSelectedSound] = useState<Sound>(null);

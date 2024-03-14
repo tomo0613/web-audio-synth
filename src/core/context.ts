@@ -11,13 +11,13 @@ const tracks: SoundTrack[] = [];
 function play() {
     tracks.forEach((track) => {
         track.play(audioContext.currentTime);
-    })
+    });
 }
 
 function stop() {
     tracks.forEach((track) => {
         track.stop();
-    })
+    });
 }
 
 export const context = {

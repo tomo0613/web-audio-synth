@@ -1,5 +1,5 @@
-import { AmpEnvelope } from "./SoundEnvelope";
 import { context } from "./context";
+import { AmpEnvelope } from "./SoundEnvelope";
 
 let i = 0;
 
@@ -11,15 +11,20 @@ interface ISoundProps {
 
 export class Sound {
     id = `Sound_${i++}`;
+
     envelopes = {
         amp: new AmpEnvelope(),
         pitch: null,
     };
+
     length: number;
+
     frequency: number;
+
     oscillator: OscillatorNode | null = null;
+
     waveForm: OscillatorType;
-    
+
     constructor({ length = 1, frequency = 440, waveForm = "sine" }: ISoundProps) {
         this.length = length;
         this.frequency = frequency;
@@ -29,8 +34,8 @@ export class Sound {
     private init() {
         const oscillator = context.instance.createOscillator();
 
-        if (this.waveForm === 'custom') {
-            throw new Error("ToDo implement customWave: PeriodicWave")
+        if (this.waveForm === "custom") {
+            throw new Error("ToDo implement customWave: PeriodicWave");
             // oscillator.setPeriodicWave(customWave);
         } else {
             oscillator.type = this.waveForm;
@@ -48,7 +53,7 @@ export class Sound {
 
         this.oscillator.connect(ampEnvelopeGain);
         ampEnvelopeGain.connect(context.gainNode);
-        
+
         this.oscillator.start(startTime);
     }
 

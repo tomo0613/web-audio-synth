@@ -4,6 +4,7 @@ let i = 0;
 
 export class SoundTrack {
     id = `SoundTrack_${i++}`;
+
     sounds: Set<Sound>;
 
     constructor(sounds: Sound[]) {
@@ -13,7 +14,7 @@ export class SoundTrack {
     add(sound: Sound) {
         this.sounds.add(sound);
     }
-    
+
     remove(sound: Sound) {
         this.sounds.delete(sound);
     }
