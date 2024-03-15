@@ -29,9 +29,9 @@ const frequencies = {
 };
 
 export const testTrack = new SoundTrack([
-    new Sound({ frequency: frequencies.G3 }),
-    new Sound({ frequency: frequencies.G3 }),
-    new Sound({ frequency: frequencies.G3 }),
-    new Sound({ frequency: frequencies.Eb3, length: 3 / 4 }),
-    new Sound({ frequency: frequencies.Bb3, length: 1 / 4 }),
+    [0, new Sound({ frequency: frequencies.G3 })],
+    [1, new Sound({ frequency: frequencies.G3 })],
+    [2, new Sound({ frequency: frequencies.G3 })],
+    [3, new Sound({ frequency: frequencies.Eb3, length: 3 / 4 })],
+    [4, new Sound({ frequency: frequencies.Bb3, length: 1 / 4 })],
 ]);

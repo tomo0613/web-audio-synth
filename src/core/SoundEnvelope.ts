@@ -19,8 +19,6 @@ export class AmpEnvelope {
         const releaseDuration = this.release; // * MAX_TIME
         const releaseEndTime = releaseTime + releaseDuration;
 
-        gainNode.gain.cancelScheduledValues(startTime);
-        gainNode.gain.setValueAtTime(0, startTime);
         // attack
         gainNode.gain.linearRampToValueAtTime(1, attackEndTime);
         // decay

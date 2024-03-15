@@ -18,7 +18,7 @@ export const SoundTrack: React.FC<SoundTrackProps> = ({ track }) => {
 
     return (
         <Stack sx={sx} spacing={1} direction={"row"}>
-            {sounds.map((sound) => <Sound key={sound.id} sound={sound} />)}
+            {sounds.map(([position, sound]) => <Sound key={sound.id} sound={sound} />)}
         </Stack>
     );
 };

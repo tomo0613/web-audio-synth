@@ -5,33 +5,36 @@ let i = 0;
 export class SoundTrack {
     id = `SoundTrack_${i++}`;
 
-    sounds: Set<Sound>;
+    sounds: Map<number, Sound>;
 
-    constructor(sounds: Sound[]) {
-        this.sounds = new Set(sounds);
+    positions: number[] = [];
+
+    constructor(sounds: [number, Sound][]) {
+        this.sounds = new Map(sounds);
+
+        this.updatePositions();
     }
 
-    add(sound: Sound) {
-        this.sounds.add(sound);
+    add(sound: Sound, position: number) {
+        this.sounds.set(position, sound);
+
+        this.updatePositions();
     }
 
-    remove(sound: Sound) {
-        this.sounds.delete(sound);
+    move(sound: Sound, currentPosition: number, nextPosition: number) {
+        this.sounds.delete(currentPosition);
+        this.sounds.set(nextPosition, sound);
+
+        this.updatePositions();
     }
 
-    play(now: number) {
-        let i = 0;
+    remove(position: number) {
+        this.sounds.delete(position);
 
-        this.sounds.forEach((sound) => {
-            sound.play(now + i * 1);
-
-            i += 1;
-        });
+        this.updatePositions();
     }
 
-    stop() {
-        this.sounds.forEach((sound) => {
-            sound.stop();
-        });
+    private updatePositions() {
+        this.positions = Array.from(this.sounds.keys()).sort();
     }
 }

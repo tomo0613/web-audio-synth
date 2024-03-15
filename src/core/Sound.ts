@@ -57,7 +57,7 @@ export class Sound {
         this.oscillator.start(startTime);
     }
 
-    stop() {
-        this.oscillator.stop();
+    stop(stopTime?: number) {
+        this.oscillator.stop(stopTime);
     }
 }

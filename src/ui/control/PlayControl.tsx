@@ -5,11 +5,11 @@ import { context } from "@core/context";
 
 export const PlayControl = () => {
     function play() {
-        context.play();
+        context.scheduler.start();
     }
 
     function stop() {
-        context.stop();
+        context.scheduler.stop();
     }
 
     return (
