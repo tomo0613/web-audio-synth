@@ -9,6 +9,8 @@ export const defaultContextValue = {
     setSelectedSound: noop as React.Dispatch<React.SetStateAction<Sound>>,
     frequency: 440,
     setFrequency: noop as React.Dispatch<React.SetStateAction<number>>,
+    waveForm: "sine" as OscillatorType,
+    setWaveForm: noop as React.Dispatch<React.SetStateAction<OscillatorType>>,
     ampEnvelopeState: ampEnvelopeDefaultState,
     ampEnvelopeDispatch: noop as React.Dispatch<Action>,
 };

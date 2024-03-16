@@ -10,10 +10,15 @@ import { AmpEnvelopeControl } from "./control/ampEnvelope/AmpEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
 import { MasterVolumeControl } from "./control/MasterVolumeControl";
 import { PlayControl } from "./control/PlayControl";
+import { TempoControl } from "./control/TempoControl";
+import { WaveFormControl } from "./control/WaveFormControl";
 import { SoundTrackList } from "./SoundTrackList";
 import { theme } from "./theme";
 
-context.tracks[0] = testTrack;
+// test
+context.tracks[0] = testTrack[0];
+context.tracks[1] = testTrack[1];
+context.tracks[2] = testTrack[2];
 
 export const App = () => {
     return (
@@ -21,6 +26,7 @@ export const App = () => {
             <CssBaseline />
             <UiContextProvider>
                 <MasterVolumeControl />
+                <TempoControl />
                 <PlayControl />
                 <SoundTrackList />
                 <AudioAnalyserDisplay />
@@ -30,6 +36,7 @@ export const App = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <FrequencyControl />
+                        <WaveFormControl />
                     </Grid>
                 </Grid>
             </UiContextProvider>

@@ -58,6 +58,7 @@ export class Sound {
     }
 
     stop(stopTime?: number) {
+        // ampEnvelopeGain.gain.cancelScheduledValues(stopTime);
         this.oscillator.stop(stopTime);
     }
 }

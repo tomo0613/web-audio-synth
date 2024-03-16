@@ -8,6 +8,7 @@ import { ActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [selectedSound, setSelectedSound] = useState<Sound>(null);
     const [frequency, setFrequency] = useState(440);
+    const [waveForm, setWaveForm] = useState<OscillatorType>("sine");
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
 
     useEffect(() => {
@@ -16,6 +17,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         }
 
         setFrequency(selectedSound.frequency);
+        setWaveForm(selectedSound.waveForm);
         ampEnvelopeDispatch({ type: ActionType.initializeForm, payload: selectedSound.envelopes.amp });
     }, [selectedSound]);
 
@@ -24,6 +26,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         setSelectedSound,
         frequency,
         setFrequency,
+        waveForm,
+        setWaveForm,
         ampEnvelopeState,
         ampEnvelopeDispatch,
     };

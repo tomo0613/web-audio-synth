@@ -2,21 +2,35 @@ import type { SoundTrack } from "./SoundTrack";
 
 export class Scheduler {
     loop = true;
-    // tempo = 120;
     /**
-     * scheduleInterval milliseconds
+     * scheduleInterval - milliseconds
      */
-    scheduleInterval = 500;
+    scheduleInterval = 100;
     /**
-     * scheduleAheadTime seconds
+     * scheduleAheadTime - seconds
      */
-    scheduleAheadTime = 0.600;
+    scheduleAheadTime = 0.200;
     private active = false;
     private audioContext: AudioContext;
     private tracks: SoundTrack[];
+    private currentPosition = 0;
     private startTime = 0;
     private nextSoundStartTime = 0;
     private timeoutId = 0;
+    private timeStep = 60 / 90 / 4;
+    private _tempo = 90;
+
+    /**
+     * tempo - beats per minute (BPM)
+     */
+    get tempo() {
+        return this._tempo;
+    }
+
+    set tempo(value: number) {
+        this._tempo = value;
+        this.timeStep = 60 / value / 4;
+    }
 
     constructor(audioContext: AudioContext, tracks: SoundTrack[]) {
         this.audioContext = audioContext;
@@ -44,9 +58,6 @@ export class Scheduler {
 
         const elapsedTime = this.audioContext.currentTime - this.startTime;
 
-        console.log("--schedule--", { elapsedTime, nextSoundStartTime: this.nextSoundStartTime });
-        // this.nextSoundStartTime < Infinity  if  loop
-
         while (this.nextSoundStartTime < elapsedTime + this.scheduleAheadTime) {
             const playTime = this.nextSoundStartTime + this.startTime;
 
@@ -60,34 +71,38 @@ export class Scheduler {
     }
 
     private prepareNextSound() {
-        let next: number;
+        this.currentPosition++;
+        this.nextSoundStartTime += this.timeStep;
 
-        this.tracks.forEach(({ positions }) => {
-            if (!positions.length) {
-                return;
-            }
+        let lastPosition = 0;
 
-            const index = positions.indexOf(this.nextSoundStartTime);
-            const nextOnTrack: number | undefined = positions[index + 1];
-
-            if (next === undefined || nextOnTrack < next) {
-                next = nextOnTrack;
+        this.tracks.forEach((track) => {
+            if (track.lastPosition && track.lastPosition > lastPosition) {
+                lastPosition = track.lastPosition;
             }
         });
 
-        console.log("--prepareNextSound--", { next });
+        const lastStep = this.currentPosition > lastPosition;
 
-        if (!next && !this.loop) {
-            this.stop();
+        if (lastStep) {
+            if (this.loop) {
+                this.currentPosition = 0;
+            } else {
+                this.stop();
+            }
         }
-
-        this.nextSoundStartTime = next || 0;
     }
 
     private playAtTime(startTime: number) {
         this.tracks.forEach(({ sounds }) => {
-            const sound = sounds.get(this.nextSoundStartTime);
-            const stopTime = startTime + sound.length + sound.envelopes.amp.release;
+            const sound = sounds.get(this.currentPosition);
+
+            if (!sound) {
+                return;
+            }
+
+            const absoluteSoundLength = 60 / this._tempo * sound.length;
+            const stopTime = startTime + absoluteSoundLength + sound.envelopes.amp.release;
 
             sound.play(startTime);
             sound.stop(stopTime);

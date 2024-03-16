@@ -1,11 +1,6 @@
-import { Box, Card, Stack, SxProps, TextField, Typography } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import { useUiContext } from "@ui/context/UiContext";
-import { useState } from "react";
-
-const cardSx: SxProps = {
-    p: 4,
-};
 
 export const FrequencyControl = () => {
     const { selectedSound, frequency, setFrequency } = useUiContext();
@@ -23,13 +18,12 @@ export const FrequencyControl = () => {
     }
 
     return (
-        <Card sx={cardSx}>
-            <TextField
-                label="Frequency"
-                onChange={handleChange}
-                type="number"
-                value={frequency}
-            />
-        </Card>
+        <TextField
+            label="Frequency"
+            onChange={handleChange}
+            type="number"
+            value={frequency}
+            disabled={!selectedSound}
+        />
     );
 };
