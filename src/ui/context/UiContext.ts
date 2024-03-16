@@ -13,6 +13,8 @@ export const defaultContextValue = {
     setWaveForm: noop as React.Dispatch<React.SetStateAction<OscillatorType>>,
     ampEnvelopeState: ampEnvelopeDefaultState,
     ampEnvelopeDispatch: noop as React.Dispatch<Action>,
+    trackSegmentCount: 0,
+    setTrackSegmentCount: noop as React.Dispatch<React.SetStateAction<number>>,
 };
 
 export const UiContext = createContext(defaultContextValue);

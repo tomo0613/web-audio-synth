@@ -10,6 +10,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     const [frequency, setFrequency] = useState(440);
     const [waveForm, setWaveForm] = useState<OscillatorType>("sine");
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
+    const [trackSegmentCount, setTrackSegmentCount] = useState(getInitialSegmentCount());
 
     useEffect(() => {
         if (!selectedSound) {
@@ -30,6 +31,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         setWaveForm,
         ampEnvelopeState,
         ampEnvelopeDispatch,
+        trackSegmentCount,
+        setTrackSegmentCount,
     };
 
     return (
@@ -38,3 +41,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         </UiContext.Provider>
     );
 };
+
+function getInitialSegmentCount() {
+    return context.tracks.reduce((n, track) => Math.max(n, track.lastPosition || 0), 0);
+}

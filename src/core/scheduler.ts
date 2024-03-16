@@ -1,5 +1,12 @@
 import type { SoundTrack } from "./SoundTrack";
 
+/**
+ * @returns timeStep - sixteenth note length
+ */
+function calculateTimeStep(tempo: number) {
+    return 60 / tempo / 4;
+}
+
 export class Scheduler {
     loop = true;
     /**
@@ -17,11 +24,11 @@ export class Scheduler {
     private startTime = 0;
     private nextSoundStartTime = 0;
     private timeoutId = 0;
-    private timeStep = 60 / 90 / 4;
-    private _tempo = 90;
+    private timeStep = calculateTimeStep(180);
+    private _tempo = 180;
 
     /**
-     * tempo - beats per minute (BPM)
+     * tempo - BPM ~ beats (quarter note) per minute
      */
     get tempo() {
         return this._tempo;
@@ -29,7 +36,7 @@ export class Scheduler {
 
     set tempo(value: number) {
         this._tempo = value;
-        this.timeStep = 60 / value / 4;
+        this.timeStep = calculateTimeStep(value);
     }
 
     constructor(audioContext: AudioContext, tracks: SoundTrack[]) {
@@ -41,6 +48,7 @@ export class Scheduler {
         this.active = true;
         this.startTime = this.audioContext.currentTime + 0.005;
         this.nextSoundStartTime = 0;
+        this.currentPosition = 0;
 
         this.schedule();
     }
@@ -74,15 +82,10 @@ export class Scheduler {
         this.currentPosition++;
         this.nextSoundStartTime += this.timeStep;
 
-        let lastPosition = 0;
-
-        this.tracks.forEach((track) => {
-            if (track.lastPosition && track.lastPosition > lastPosition) {
-                lastPosition = track.lastPosition;
-            }
-        });
-
-        const lastStep = this.currentPosition > lastPosition;
+        const absoluteLastPosition = this.tracks.reduce((lastPosition, track) => (
+            Math.max(lastPosition, track.lastPosition || 0)
+        ), 0);
+        const lastStep = this.currentPosition > absoluteLastPosition;
 
         if (lastStep) {
             if (this.loop) {
@@ -101,7 +104,7 @@ export class Scheduler {
                 return;
             }
 
-            const absoluteSoundLength = 60 / this._tempo * sound.length;
+            const absoluteSoundLength = this.timeStep * 16 * sound.length;
             const stopTime = startTime + absoluteSoundLength + sound.envelopes.amp.release;
 
             sound.play(startTime);

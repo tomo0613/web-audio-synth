@@ -1,7 +1,7 @@
 import { Box, Card, Slider, Stack, SxProps, Typography } from "@mui/material";
 
 import { useUiContext } from "@ui/context/UiContext";
-import { ActionType } from "../../context/useAmpEnvelopeState";
+import { ActionType } from "@ui/context/useAmpEnvelopeState";
 
 const cardSx: SxProps = {
     p: 4,

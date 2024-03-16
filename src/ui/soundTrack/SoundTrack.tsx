@@ -1,11 +1,13 @@
-import { Stack, SxProps } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 
-import { context } from "@core/context";
 import type { SoundTrack as ISoundTrack } from "@core/SoundTrack";
 import { Sound } from "./Sound";
+import { trackHeight } from "./style";
 
 const sx: SxProps = {
-    p: 1,
+    py: 1,
+    height: trackHeight,
+    position: "relative",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
 };
 
@@ -17,8 +19,8 @@ export const SoundTrack: React.FC<SoundTrackProps> = ({ track }) => {
     const sounds = Array.from(track.sounds);
 
     return (
-        <Stack sx={sx} spacing={1} direction={"row"}>
-            {sounds.map(([position, sound]) => <Sound key={sound.id} sound={sound} />)}
-        </Stack>
+        <Box sx={sx}>
+            {sounds.map(([position, sound]) => <Sound key={sound.id} sound={sound} position={position} />)}
+        </Box>
     );
 };

@@ -6,13 +6,13 @@ import { context } from "@core/context";
 import { testTrack } from "@core/testTrack";
 import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
 import { UiContextProvider } from "./context/UiContextProvider";
-import { AmpEnvelopeControl } from "./control/ampEnvelope/AmpEnvelopeControl";
+import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
 import { MasterVolumeControl } from "./control/MasterVolumeControl";
 import { PlayControl } from "./control/PlayControl";
 import { TempoControl } from "./control/TempoControl";
 import { WaveFormControl } from "./control/WaveFormControl";
-import { SoundTrackList } from "./SoundTrackList";
+import { SoundTrackList } from "./soundTrack/SoundTrackList";
 import { theme } from "./theme";
 
 // test

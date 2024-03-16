@@ -32,26 +32,41 @@ const frequencies = {
 export const testTrack = [
     new SoundTrack([
         [0, new Sound({ frequency: frequencies.A3, length: 1 / 2 })],
-        //
-        [2, new Sound({ frequency: frequencies.G4, length: 1 / 16 })],
-        [3, new Sound({ frequency: frequencies.A4, length: 1 / 16 })],
-        [4, new Sound({ frequency: frequencies.B4, length: 1 / 4 })],
-        [5, new Sound({ frequency: frequencies.G4, length: 1 / 4 })],
-        [6, new Sound({ frequency: frequencies.D4, length: 1 / 2 })],
-        [7, new Sound({ frequency: frequencies.A3, length: 1 / 4 })],
-        //
-        [9, new Sound({ frequency: frequencies.D4, length: 1 / 4 })],
+        // + 7 = 7,
+        // [8, 1/2]
+        // + 7 = 15,
+        // [16, 1/4]
+        // + 3 = 19,
+        // [20, 1/8]
+        // + 1 = 21
+        [22, new Sound({ frequency: frequencies.G4, length: 1 / 16 })],
+        [23, new Sound({ frequency: frequencies.A4, length: 1 / 16 })],
+        [24, new Sound({ frequency: frequencies.B4, length: 1 / 4 })],
+        // + 3 = 27
+        [28, new Sound({ frequency: frequencies.G4, length: 1 / 4 })],
+        // + 3 = 31
+        [32, new Sound({ frequency: frequencies.D4, length: 1 / 2 })],
+        // + 7 = 39
+        // [40, 1/4]
+        // + 3 = 43,
+        [44, new Sound({ frequency: frequencies.A3, length: 1 / 4 })],
+        // + 3 = 47
+        // [48, 1/2]
+        // + 7 = 55,
+        // [56, 1/4]
+        // + 3 = 59,
+        [60, new Sound({ frequency: frequencies.D4, length: 1 / 4 })],
     ]),
     new SoundTrack([
         [0, new Sound({ frequency: frequencies.C4, length: 1 / 2 })],
         //
-        [6, new Sound({ frequency: frequencies.B3, length: 1 / 2 })],
-        [7, new Sound({ frequency: frequencies.C4, length: 1 / 4 })],
+        [32, new Sound({ frequency: frequencies.B3, length: 1 / 2 })],
+        [44, new Sound({ frequency: frequencies.C4, length: 1 / 4 })],
     ]),
     new SoundTrack([
         [0, new Sound({ frequency: frequencies.E4, length: 1 / 2 })],
         //
-        [6, new Sound({ frequency: frequencies.G3, length: 1 / 2 })],
-        [7, new Sound({ frequency: frequencies.E4, length: 1 / 4 })],
+        [32, new Sound({ frequency: frequencies.G3, length: 1 / 2 })],
+        [44, new Sound({ frequency: frequencies.E4, length: 1 / 4 })],
     ]),
 ];
