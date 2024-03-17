@@ -1,44 +1,18 @@
-import { Box, Divider, LinearProgress, Stack, styled, SxProps } from "@mui/material";
+import { Box, Divider, LinearProgress, Stack } from "@mui/material";
+import type { SxProps } from "@mui/material";
 
 import { context } from "@core/context";
 import { useUiContext } from "../context/UiContext";
 import { SoundTrack } from "./SoundTrack";
+import { SoundTrackListBackPlate } from "./SoundTrackListBackPlate";
 import { segmentWidth } from "./style";
 
-const Segment = styled(Box)(({ theme }) => ({
-    width: `${segmentWidth}px`,
-    height: "100%",
-    display: "inline-block",
-    borderRight: `1px solid ${theme.palette.divider}`,
-    "&:nth-of-type(even)": {
-        backgroundColor: "rgba(0, 0, 0, 0.1)",
-    },
-    "&:nth-of-type(4n)": {
-        borderRight: `1px solid ${theme.palette.primary.main}`,
-    },
-}));
-
-const soundTrackBackPlateSx: SxProps = {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-};
-
-const SoundTrackBackPlate = () => {
-    const { trackSegmentCount } = useUiContext();
-
-    return (
-        <Box sx={soundTrackBackPlateSx}>
-            {Array.from({ length: trackSegmentCount }).map((_, i) => <Segment key={`segment_${i}`} />)}
-        </Box>
-    );
-};
-
 const SoundtrackProgress = () => {
-    // const p = context.scheduler.
+    const { progress } = useUiContext();
+
     return (
-        // <LinearProgress variant="determinate" value={progress} />
-        <LinearProgress />
+        <LinearProgress variant="determinate" value={progress} />
+        // <LinearProgress />
     );
 };
 
@@ -55,8 +29,9 @@ export const SoundTrackList = () => {
 
     return (
         <Box sx={soundTrackListSx} width={width}>
-            <SoundTrackBackPlate />
+            <SoundTrackListBackPlate />
             <Stack divider={<Divider />}>
+                <SoundtrackProgress />
                 {context.tracks.map((track) => <SoundTrack key={track.id} track={track} />)}
             </Stack>
         </Box>

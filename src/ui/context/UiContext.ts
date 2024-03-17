@@ -15,6 +15,7 @@ export const defaultContextValue = {
     ampEnvelopeDispatch: noop as React.Dispatch<Action>,
     trackSegmentCount: 0,
     setTrackSegmentCount: noop as React.Dispatch<React.SetStateAction<number>>,
+    progress: 0,
 };
 
 export const UiContext = createContext(defaultContextValue);

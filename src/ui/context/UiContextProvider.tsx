@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
 import type { Sound } from "@core/Sound";
-import { UiContext } from "./UiContext";
+import { defaultContextValue, UiContext } from "./UiContext";
 import { ActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
+import { useProgress } from "./useProgress";
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const [selectedSound, setSelectedSound] = useState<Sound>(null);
-    const [frequency, setFrequency] = useState(440);
-    const [waveForm, setWaveForm] = useState<OscillatorType>("sine");
+    const [selectedSound, setSelectedSound] = useState<Sound>(defaultContextValue.selectedSound);
+    const [frequency, setFrequency] = useState(defaultContextValue.frequency);
+    const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
     const [trackSegmentCount, setTrackSegmentCount] = useState(getInitialSegmentCount());
+    const progress = useProgress(trackSegmentCount, defaultContextValue.progress);
 
     useEffect(() => {
         if (!selectedSound) {
@@ -33,6 +35,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         ampEnvelopeDispatch,
         trackSegmentCount,
         setTrackSegmentCount,
+        progress,
     };
 
     return (

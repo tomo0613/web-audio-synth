@@ -1,3 +1,4 @@
+import EventListener from "@common/EventListener";
 import type { SoundTrack } from "./SoundTrack";
 
 /**
@@ -17,6 +18,7 @@ export class Scheduler {
      * scheduleAheadTime - seconds
      */
     scheduleAheadTime = 0.200;
+    listener = new EventListener<"start" | "stop">();
     private active = false;
     private audioContext: AudioContext;
     private tracks: SoundTrack[];
@@ -24,8 +26,8 @@ export class Scheduler {
     private startTime = 0;
     private nextSoundStartTime = 0;
     private timeoutId = 0;
-    private timeStep = calculateTimeStep(180);
     private _tempo = 180;
+    private _timeStep = calculateTimeStep(180);
 
     /**
      * tempo - BPM ~ beats (quarter note) per minute
@@ -36,7 +38,11 @@ export class Scheduler {
 
     set tempo(value: number) {
         this._tempo = value;
-        this.timeStep = calculateTimeStep(value);
+        this._timeStep = calculateTimeStep(value);
+    }
+
+    get timeStep() {
+        return this._timeStep;
     }
 
     constructor(audioContext: AudioContext, tracks: SoundTrack[]) {
@@ -45,18 +51,25 @@ export class Scheduler {
     }
 
     start() {
+        if (this.active) {
+            return;
+        }
         this.active = true;
         this.startTime = this.audioContext.currentTime + 0.005;
         this.nextSoundStartTime = 0;
         this.currentPosition = 0;
 
         this.schedule();
+
+        this.listener.dispatch("start");
     }
 
     stop() {
         this.active = false;
 
         clearTimeout(this.timeoutId);
+
+        this.listener.dispatch("stop");
     }
 
     private schedule() {
