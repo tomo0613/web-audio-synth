@@ -1,14 +1,10 @@
-import { context } from "./context";
-
 export class AmpEnvelope {
     attack = 0;
     decay = 0;
     sustain = 1;
     release = 0;
 
-    init(startTime: number, length: number) {
-        const gainNode = context.instance.createGain();
-
+    init(gainNode: GainNode, startTime: number, length: number) {
         const attackDuration = this.attack;
         const attackEndTime = startTime + attackDuration;
         const decayDuration = this.decay;
@@ -25,15 +21,16 @@ export class AmpEnvelope {
         gainNode.gain.setValueAtTime(this.sustain, releaseTime);
         // release
         gainNode.gain.linearRampToValueAtTime(0, releaseEndTime);
-
-        return gainNode;
     }
 }
 
 export class PitchEnvelope {
+    initial = 0;
+    end = 0;
     time = 0;
 
-    init(oscillator: OscillatorNode) {
-        // oscillator.frequency.setValueAtTime(0, 0);
+    init(oscillator: OscillatorNode, startTime: number, frequency: number) {
+        oscillator.frequency.setValueAtTime(frequency + this.initial, startTime);
+        oscillator.frequency.linearRampToValueAtTime(frequency + this.end, startTime + this.time);
     }
 }

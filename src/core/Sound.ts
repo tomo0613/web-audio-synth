@@ -41,16 +41,16 @@ export class Sound {
             oscillator.type = this.waveForm;
         }
 
-        oscillator.frequency.value = this.frequency;
-
         this.oscillator = oscillator;
     }
 
     play(startTime: number, length: number) {
+        const ampEnvelopeGain = context.instance.createGain();
+
         this.init();
 
-        const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
-        this.envelopes.pitch.init(this.oscillator);
+        this.envelopes.amp.init(ampEnvelopeGain, startTime, length);
+        this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
 
         this.oscillator.connect(ampEnvelopeGain);
         ampEnvelopeGain.connect(context.gainNode);

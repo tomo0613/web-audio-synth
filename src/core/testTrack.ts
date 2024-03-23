@@ -29,6 +29,20 @@ const frequencies = {
     B4: 493.88,
 };
 
+const kick = {
+    amp: {
+        attack: 0.03,
+        release: 0.22,
+    },
+    pitch: {
+        initial: 110,
+        end: -110,
+        time: 0.12,
+    },
+    frequency: frequencies.C3,
+    length: 1 / 4,
+};
+
 export const testTrack = [
     new SoundTrack([
         [0, new Sound({ frequency: frequencies.A3, length: 1 / 2 })],

@@ -1,4 +1,4 @@
-import { Box, Card, Slider, Stack, SxProps, Typography } from "@mui/material";
+import { Box, Card, Divider, Slider, Stack, SxProps, Typography } from "@mui/material";
 
 import { useUiContext } from "@ui/context/UiContext";
 import { ActionType } from "@ui/context/useAmpEnvelopeState";
@@ -20,7 +20,12 @@ export const AmpEnvelopeControl = () => {
 
     return (
         <Card sx={cardSx}>
-            <Stack spacing={2}>
+            <Divider>
+                <Typography>
+                    Amplitude
+                </Typography>
+            </Divider>
+            <Stack mt={2} spacing={2}>
                 {Object.entries(ampEnvelopeState).map(([key, value]) => (
                     <Box key={key}>
                         <Typography>

@@ -9,6 +9,7 @@ import { UiContextProvider } from "./context/UiContextProvider";
 import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
 import { MasterVolumeControl } from "./control/MasterVolumeControl";
+import { PitchEnvelopeControl } from "./control/PitchEnvelopeControl";
 import { PlayControl } from "./control/PlayControl";
 import { TempoControl } from "./control/TempoControl";
 import { WaveFormControl } from "./control/WaveFormControl";
@@ -30,9 +31,12 @@ export const App = () => {
                 <PlayControl />
                 <SoundTrackList />
                 <AudioAnalyserDisplay />
-                <Grid container>
+                <Grid container spacing={4}>
                     <Grid item xs={4}>
                         <AmpEnvelopeControl />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <PitchEnvelopeControl />
                     </Grid>
                     <Grid item xs={4}>
                         <FrequencyControl />
