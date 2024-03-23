@@ -7,13 +7,16 @@ import { SoundTrack } from "./SoundTrack";
 import { SoundTrackListBackPlate } from "./SoundTrackListBackPlate";
 import { segmentWidth } from "./style";
 
+const progressBarSx: SxProps = {
+    "& .MuiLinearProgress-bar": {
+        transition: "none",
+    },
+};
+
 const SoundtrackProgress = () => {
     const { progress } = useUiContext();
 
-    return (
-        <LinearProgress variant="determinate" value={progress} />
-        // <LinearProgress />
-    );
+    return <LinearProgress sx={progressBarSx} variant="determinate" value={progress} />;
 };
 
 const soundTrackListSx: SxProps = {

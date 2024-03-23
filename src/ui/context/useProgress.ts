@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
+import type { SoundTrack } from "@core/SoundTrack";
 
 let timeoutId = 0;
 let startTime = 0;
 
-export function useProgress(trackSegmentCount: number, defaultValue: number) {
+export function useProgress(defaultValue: number) {
     const [progress, setProgress] = useState(defaultValue);
 
     useEffect(() => {
@@ -32,15 +33,28 @@ export function useProgress(trackSegmentCount: number, defaultValue: number) {
     }
 
     function updateProgress() {
-        const total = trackSegmentCount * context.scheduler.timeStep;
+        const endTime = startTime + context.tracks.reduce(aggregateEndTime, 0);
+        const total = endTime - startTime;
         const current = context.instance.currentTime - startTime;
 
         setProgress(100 / total * current);
 
-        // timeoutId = setTimeout(() => {
-        //     updateProgress();
-        // }, context.scheduler.timeStep / 4);
+        timeoutId = setTimeout(() => {
+            updateProgress();
+        }, context.scheduler.timeStep / 4);
     }
 
     return progress;
+}
+
+function aggregateEndTime(n: number, track: SoundTrack) {
+    if (track.lastPosition === undefined) {
+        return n;
+    }
+
+    const lastSound = track.sounds.get(track.lastPosition);
+    const lastSoundLength = lastSound.length + lastSound.envelopes.amp.release;
+    const trackLength = track.lastPosition * context.scheduler.timeStep + lastSoundLength;
+
+    return Math.max(n, trackLength);
 }

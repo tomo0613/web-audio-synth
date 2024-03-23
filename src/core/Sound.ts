@@ -1,5 +1,5 @@
 import { context } from "./context";
-import { AmpEnvelope } from "./SoundEnvelope";
+import { AmpEnvelope, PitchEnvelope } from "./SoundEnvelope";
 
 let i = 0;
 
@@ -14,7 +14,7 @@ export class Sound {
 
     envelopes = {
         amp: new AmpEnvelope(),
-        pitch: null,
+        pitch: new PitchEnvelope(),
     };
 
     length: number;
@@ -46,10 +46,11 @@ export class Sound {
         this.oscillator = oscillator;
     }
 
-    play(startTime: number) {
+    play(startTime: number, length: number) {
         this.init();
 
-        const ampEnvelopeGain = this.envelopes.amp.init(startTime, this.length);
+        const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
+        this.envelopes.pitch.init(this.oscillator);
 
         this.oscillator.connect(ampEnvelopeGain);
         ampEnvelopeGain.connect(context.gainNode);

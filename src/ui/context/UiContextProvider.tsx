@@ -12,7 +12,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
     const [trackSegmentCount, setTrackSegmentCount] = useState(getInitialSegmentCount());
-    const progress = useProgress(trackSegmentCount, defaultContextValue.progress);
+    const progress = useProgress(defaultContextValue.progress);
 
     useEffect(() => {
         if (!selectedSound) {

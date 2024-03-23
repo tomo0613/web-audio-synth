@@ -120,7 +120,7 @@ export class Scheduler {
             const absoluteSoundLength = this.timeStep * 16 * sound.length;
             const stopTime = startTime + absoluteSoundLength + sound.envelopes.amp.release;
 
-            sound.play(startTime);
+            sound.play(startTime, absoluteSoundLength);
             sound.stop(stopTime);
         });
     }
