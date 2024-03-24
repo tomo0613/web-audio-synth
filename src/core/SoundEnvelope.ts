@@ -4,7 +4,7 @@ export class AmpEnvelope {
     sustain = 1;
     release = 0;
 
-    init(gainNode: GainNode, startTime: number, length: number) {
+    init(gain: GainNode, startTime: number, length: number) {
         const attackDuration = this.attack;
         const attackEndTime = startTime + attackDuration;
         const decayDuration = this.decay;
@@ -12,15 +12,15 @@ export class AmpEnvelope {
         const releaseDuration = this.release;
         const releaseEndTime = releaseTime + releaseDuration;
 
-        gainNode.gain.setValueAtTime(0, startTime);
+        gain.gain.setValueAtTime(0, startTime);
         // attack
-        gainNode.gain.linearRampToValueAtTime(1, attackEndTime);
+        gain.gain.linearRampToValueAtTime(1, attackEndTime);
         // decay
-        gainNode.gain.setTargetAtTime(this.sustain, attackEndTime, decayDuration);
+        gain.gain.setTargetAtTime(this.sustain, attackEndTime, decayDuration);
         // sustain
-        gainNode.gain.setValueAtTime(this.sustain, releaseTime);
+        gain.gain.setValueAtTime(this.sustain, releaseTime);
         // release
-        gainNode.gain.linearRampToValueAtTime(0, releaseEndTime);
+        gain.gain.linearRampToValueAtTime(0, releaseEndTime);
     }
 }
 
@@ -32,5 +32,18 @@ export class PitchEnvelope {
     init(oscillator: OscillatorNode, startTime: number, frequency: number) {
         oscillator.frequency.setValueAtTime(frequency + this.initial, startTime);
         oscillator.frequency.linearRampToValueAtTime(frequency + this.end, startTime + this.time);
+    }
+}
+
+export class FilterEnvelope {
+    enabled = false;
+    type: BiquadFilterType = "lowpass";
+    frequency = 0;
+    q = 0;
+
+    init(filter: BiquadFilterNode) {
+        filter.type = this.type;
+        filter.frequency.value = this.frequency;
+        filter.Q.value = this.q;
     }
 }

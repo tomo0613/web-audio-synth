@@ -1,5 +1,5 @@
 import { context } from "./context";
-import { AmpEnvelope, PitchEnvelope } from "./SoundEnvelope";
+import { AmpEnvelope, FilterEnvelope, PitchEnvelope } from "./SoundEnvelope";
 
 let i = 0;
 
@@ -15,6 +15,7 @@ export class Sound {
     envelopes = {
         amp: new AmpEnvelope(),
         pitch: new PitchEnvelope(),
+        filter: new FilterEnvelope(),
     };
 
     length: number;
@@ -54,7 +55,17 @@ export class Sound {
         this.envelopes.amp.init(ampEnvelopeGain, startTime, length);
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
 
-        this.oscillator.connect(ampEnvelopeGain);
+        if (this.envelopes.filter.enabled) {
+            const filter = context.instance.createBiquadFilter();
+
+            this.envelopes.filter.init(filter);
+
+            this.oscillator.connect(filter);
+            filter.connect(ampEnvelopeGain);
+        } else {
+            this.oscillator.connect(ampEnvelopeGain);
+        }
+
         ampEnvelopeGain.connect(context.gainNode);
 
         this.oscillator.start(startTime);
@@ -65,6 +76,27 @@ export class Sound {
         // ampEnvelopeGain.gain.cancelScheduledValues(stopTime);
         this.oscillator.stop(stopTime);
     }
+}
+
+function createNoiseBuffer() {
+    const bufferSize = 2 * context.instance.sampleRate;
+    const noiseBuffer = context.instance.createBuffer(1, bufferSize, context.instance.sampleRate);
+    const channelData = noiseBuffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+        channelData[i] = Math.random() * 2 - 1;
+    }
+
+    return noiseBuffer;
+}
+
+function noise() {
+    const noiseSource = context.instance.createBufferSource();
+    noiseSource.buffer = createNoiseBuffer();
+    noiseSource.loop = true;
+    noiseSource.start(0);
+
+    noiseSource.connect(context.instance.destination);
 }
 
 function assertOscillator(oscillator: OscillatorNode | null): asserts oscillator is OscillatorNode {
