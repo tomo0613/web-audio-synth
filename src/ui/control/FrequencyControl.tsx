@@ -10,7 +10,7 @@ export const FrequencyControl = () => {
 
         if (Number.isNaN(value)) {
             console.error(`frequency: ${e.target.value} is not a valid`);
-        } else {
+        } else if (selectedSound) {
             selectedSound.frequency = value;
         }
 

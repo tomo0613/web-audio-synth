@@ -32,13 +32,13 @@ export const App = () => {
                 <SoundTrackList />
                 <AudioAnalyserDisplay />
                 <Grid container spacing={4}>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <AmpEnvelopeControl />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <PitchEnvelopeControl />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <FrequencyControl />
                         <WaveFormControl />
                     </Grid>

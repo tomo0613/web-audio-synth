@@ -13,7 +13,9 @@ export const PitchEnvelopeControl = () => {
     function handleSliderChange(e: Event, value: number) {
         const key = (e.target as HTMLInputElement).name;
 
-        selectedSound.envelopes.pitch[key] = value;
+        if (selectedSound) {
+            selectedSound.envelopes.pitch[key] = value;
+        }
 
         pitchEnvelopeDispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }
@@ -24,7 +26,7 @@ export const PitchEnvelopeControl = () => {
 
         if (Number.isNaN(value)) {
             console.error(`pitch[${key}]: ${e.target.value} is not a valid`);
-        } else {
+        } else if (selectedSound) {
             selectedSound.envelopes.pitch[key] = value;
         }
 

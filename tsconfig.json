@@ -11,6 +11,7 @@
             "@core/*": ["core/*"],
             "@ui/*": ["ui/*"]
         },
+        "strictNullChecks": true,
         "allowSyntheticDefaultImports": true
     },
     "include": [

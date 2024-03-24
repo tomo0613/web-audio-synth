@@ -49,6 +49,8 @@ export class Sound {
 
         this.init();
 
+        assertOscillator(this.oscillator);
+
         this.envelopes.amp.init(ampEnvelopeGain, startTime, length);
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
 
@@ -59,7 +61,14 @@ export class Sound {
     }
 
     stop(stopTime?: number) {
+        assertOscillator(this.oscillator);
         // ampEnvelopeGain.gain.cancelScheduledValues(stopTime);
         this.oscillator.stop(stopTime);
+    }
+}
+
+function assertOscillator(oscillator: OscillatorNode | null): asserts oscillator is OscillatorNode {
+    if (!oscillator) {
+        throw new Error("oscillator is null");
     }
 }

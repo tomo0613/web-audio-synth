@@ -1,11 +1,13 @@
-import { Box, Divider, LinearProgress, Stack } from "@mui/material";
+import { Divider, LinearProgress, Stack } from "@mui/material";
 import type { SxProps } from "@mui/material";
+import { useEffect, useReducer } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { context } from "@core/context";
+import changeListener from "@ui/context/changeListener";
 import { useUiContext } from "../context/UiContext";
 import { SoundTrack } from "./SoundTrack";
-import { SoundTrackListBackPlate } from "./SoundTrackListBackPlate";
-import { segmentWidth } from "./style";
 
 const progressBarSx: SxProps = {
     "& .MuiLinearProgress-bar": {
@@ -20,23 +22,32 @@ const SoundtrackProgress = () => {
 };
 
 const soundTrackListSx: SxProps = {
-    position: "relative",
     "& .MuiDivider-root": {
         borderColor: "rgba(0, 0, 0, 0.5)",
     },
 };
 
 export const SoundTrackList = () => {
-    const { trackSegmentCount } = useUiContext();
-    const width = trackSegmentCount * segmentWidth;
+    const [, forceUpdate] = useReducer((changes: number) => changes + 1, 0);
+
+    function handleUiChange() {
+        forceUpdate();
+    }
+
+    useEffect(() => {
+        changeListener.add("change", handleUiChange);
+
+        return () => {
+            changeListener.remove("change", handleUiChange);
+        };
+    }, []);
 
     return (
-        <Box sx={soundTrackListSx} width={width}>
-            <SoundTrackListBackPlate />
-            <Stack divider={<Divider />}>
+        <DndProvider backend={HTML5Backend}>
+            <Stack divider={<Divider />} sx={soundTrackListSx}>
                 <SoundtrackProgress />
-                {context.tracks.map((track) => <SoundTrack key={track.id} track={track} />)}
+                {context.tracks.map((track, i) => <SoundTrack key={track.id} track={track} index={i} />)}
             </Stack>
-        </Box>
+        </DndProvider>
     );
 };

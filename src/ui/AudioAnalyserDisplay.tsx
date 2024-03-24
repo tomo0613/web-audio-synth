@@ -24,6 +24,10 @@ export const AudioAnalyserDisplay = () => {
     }, []);
 
     const draw = useCallback((drawContext: CanvasRenderingContext2D) => {
+        if (!canvasRef.current) {
+            return;
+        }
+
         analyser.getByteTimeDomainData(analyserDataBuffer);
 
         drawContext.fillStyle = "rgb(200, 200, 200)";
@@ -55,13 +59,18 @@ export const AudioAnalyserDisplay = () => {
     }, [canvasRef.current]);
 
     useEffect(() => {
+        if (!canvasRef.current) {
+            return;
+        }
+
         let animationFrameId: number;
         const drawContext = canvasRef.current.getContext("2d");
 
         const render = () => {
-            draw(drawContext);
+            draw(drawContext!);
             animationFrameId = window.requestAnimationFrame(render);
         };
+
         render();
 
         return () => {
@@ -69,9 +78,5 @@ export const AudioAnalyserDisplay = () => {
         };
     }, [draw]);
 
-    return (
-        <Box>
-            <canvas ref={canvasRef} />
-        </Box>
-    );
+    return <Box component="canvas" ref={canvasRef} />;
 };

@@ -13,7 +13,9 @@ export const AmpEnvelopeControl = () => {
     function handleChange(e: Event, value: number) {
         const key = (e.target as HTMLInputElement).name;
 
-        selectedSound.envelopes.amp[key] = value;
+        if (selectedSound) {
+            selectedSound.envelopes.amp[key] = value;
+        }
 
         ampEnvelopeDispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }

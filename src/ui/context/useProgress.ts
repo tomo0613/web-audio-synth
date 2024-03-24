@@ -52,7 +52,7 @@ function aggregateEndTime(n: number, track: SoundTrack) {
         return n;
     }
 
-    const lastSound = track.sounds.get(track.lastPosition);
+    const lastSound = track.sounds.get(track.lastPosition)!;
     const lastSoundLength = lastSound.length + lastSound.envelopes.amp.release;
     const trackLength = track.lastPosition * context.scheduler.timeStep + lastSoundLength;
 

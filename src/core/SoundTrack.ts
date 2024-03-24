@@ -21,13 +21,6 @@ export class SoundTrack {
         this.updateLastPosition();
     }
 
-    move(sound: Sound, currentPosition: number, nextPosition: number) {
-        this.sounds.delete(currentPosition);
-        this.sounds.set(nextPosition, sound);
-
-        this.updateLastPosition();
-    }
-
     remove(position: number) {
         this.sounds.delete(position);
 

@@ -22,7 +22,9 @@ export const WaveFormControl = () => {
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         assertValue(e.target.value);
 
-        selectedSound.waveForm = e.target.value;
+        if (selectedSound) {
+            selectedSound.waveForm = e.target.value;
+        }
 
         setWaveForm(e.target.value);
     }

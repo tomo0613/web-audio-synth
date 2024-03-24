@@ -7,9 +7,9 @@ export default class EventListener<EventType extends string | number, HandlerTyp
         if (!listener) {
             throw new Error(`EventListener->add($listener) Invalid $listener: ${listener}, with type ${eventType}`);
         }
-        if (this.listeners.has(eventType)) {
-            const listeners = this.listeners.get(eventType);
+        const listeners = this.listeners.get(eventType);
 
+        if (listeners) {
             listeners.add(listener);
         } else {
             const listeners = new Set([listener]);
@@ -19,14 +19,12 @@ export default class EventListener<EventType extends string | number, HandlerTyp
     }
 
     remove(eventType: EventType, listener: HandlerType) {
-        if (this.listeners.has(eventType)) {
-            const listeners = this.listeners.get(eventType);
+        const listeners = this.listeners.get(eventType);
 
-            listeners.delete(listener);
+        listeners?.delete(listener);
 
-            if (!listeners.size) {
-                this.listeners.delete(eventType);
-            }
+        if (!listeners?.size) {
+            this.listeners.delete(eventType);
         }
     }
 
@@ -35,10 +33,8 @@ export default class EventListener<EventType extends string | number, HandlerTyp
     }
 
     dispatch(eventType: EventType, ...args: Parameters<HandlerType>) {
-        if (this.listeners.has(eventType)) {
-            const listeners = this.listeners.get(eventType);
+        const listeners = this.listeners.get(eventType);
 
-            listeners.forEach((listener) => listener(...args));
-        }
+        listeners?.forEach((listener) => listener(...args));
     }
 }

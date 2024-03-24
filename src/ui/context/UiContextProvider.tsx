@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
-import type { Sound } from "@core/Sound";
 import { defaultContextValue, UiContext } from "./UiContext";
 import { ActionType as SetAmpEnvelopeStateActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 import { ActionType as SetPitchEnvelopeStateActionType, usePitchEnvelopeState } from "./usePitchEnvelopeState";
 import { useProgress } from "./useProgress";
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const [selectedSound, setSelectedSound] = useState<Sound>(defaultContextValue.selectedSound);
+    const [selectedSound, setSelectedSound] = useState(defaultContextValue.selectedSound);
     const [frequency, setFrequency] = useState(defaultContextValue.frequency);
     const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
