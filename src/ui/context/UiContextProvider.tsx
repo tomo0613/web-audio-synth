@@ -8,6 +8,7 @@ import { useProgress } from "./useProgress";
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [selectedSound, setSelectedSound] = useState(defaultContextValue.selectedSound);
+    const [selectedSegmentId, setSelectedSegmentId] = useState(defaultContextValue.selectedSegmentId);
     const [frequency, setFrequency] = useState(defaultContextValue.frequency);
     const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
@@ -35,6 +36,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     const contextValue = {
         selectedSound,
         setSelectedSound,
+        selectedSegmentId,
+        setSelectedSegmentId,
         frequency,
         setFrequency,
         waveForm,

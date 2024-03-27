@@ -72,6 +72,14 @@ export class Scheduler {
         this.listener.dispatch("stop");
     }
 
+    toggle() {
+        if (this.active) {
+            this.stop();
+        } else {
+            this.start();
+        }
+    }
+
     private schedule() {
         if (!this.active) {
             return;

@@ -7,15 +7,16 @@ import { useUiContext } from "../context/UiContext";
 import { segmentWidth } from "./style";
 
 interface StyledSegmentProps extends BoxProps {
+    selected?: boolean;
     active?: boolean;
     dragOver?: boolean;
 }
 
 const StyledSegment = styled(Box, {
     shouldForwardProp(prop) {
-        return prop !== "active" && prop !== "dragOver";
+        return prop !== "selected" && prop !== "active" && prop !== "dragOver";
     },
-})<StyledSegmentProps>(({ theme, active, dragOver }) => ({
+})<StyledSegmentProps>(({ theme, selected, active, dragOver }) => ({
     width: `${segmentWidth}px`,
     height: "100%",
     display: "inline-block",
@@ -23,6 +24,9 @@ const StyledSegment = styled(Box, {
     "&:nth-of-type(8n + 1), &:nth-of-type(8n + 2), &:nth-of-type(8n + 3), &:nth-of-type(8n + 4)": {
         backgroundColor: "rgba(0, 64, 0, 0.1)",
     },
+    ...(selected && {
+        border: `1px solid rgba(255, 255, 255, 0.5)`,
+    }),
     ...(active && {
         border: `1px solid ${theme.palette.primary.dark}`,
     }),
@@ -40,7 +44,8 @@ interface SegmentProps extends BoxProps {
 }
 
 const Segment: React.FC<SegmentProps> = ({ rowIndex, columnIndex }) => {
-    const { progress } = useUiContext();
+    const id = `${rowIndex}/${columnIndex}`
+    const { progress, selectedSegmentId, setSelectedSegmentId } = useUiContext();
     const activeSegmentIndex = progress; // ToDo
 
     const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -58,7 +63,19 @@ const Segment: React.FC<SegmentProps> = ({ rowIndex, columnIndex }) => {
         },
     }));
 
-    return <StyledSegment active={columnIndex === activeSegmentIndex} dragOver={canDrop && isOver} ref={drop} />;
+    function handleClick() {
+        setSelectedSegmentId(id);
+    }
+
+    return (
+        <StyledSegment 
+            selected={selectedSegmentId === id}
+            onClick={handleClick}
+            active={columnIndex === activeSegmentIndex}
+            dragOver={canDrop && isOver}
+            ref={drop}
+        />
+    );
 };
 
 const soundTrackBackPlateSx: SxProps = {
@@ -77,7 +94,7 @@ export const SoundTrackBackPlate: React.FC<SoundTrackBackPlateProps> = ({ rowInd
     return (
         <Box sx={soundTrackBackPlateSx}>
             {Array.from({ length: trackSegmentCount }).map((_, i) => (
-                <Segment key={`segment_${i}`} rowIndex={rowIndex} columnIndex={i} />
+                <Segment key={`segment-${rowIndex}/${i}`} rowIndex={rowIndex} columnIndex={i} />
             ))}
         </Box>
     );

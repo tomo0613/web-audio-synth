@@ -51,8 +51,8 @@ const dragHandleSx: SxProps = {
 };
 
 export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) => {
-    const uiContext = useUiContext();
-    const selected = uiContext.selectedSound === sound;
+    const { selectedSound, setSelectedSound } = useUiContext();
+    const selected = selectedSound === sound;
     const offset = segmentWidth * columnIndex;
     const width = segmentWidth * 16 * sound.length;
 
@@ -74,7 +74,7 @@ export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) =>
     }), [rowIndex, columnIndex]);
 
     function handleClick() {
-        uiContext.setSelectedSound(sound);
+        setSelectedSound(sound);
     }
 
     return (

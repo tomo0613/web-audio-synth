@@ -4,7 +4,6 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import { context } from "@core/context";
 import { testTrack } from "@core/testTrack";
-import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
 import { UiContextProvider } from "./context/UiContextProvider";
 import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
@@ -13,7 +12,11 @@ import { PitchEnvelopeControl } from "./control/PitchEnvelopeControl";
 import { PlayControl } from "./control/PlayControl";
 import { TempoControl } from "./control/TempoControl";
 import { WaveFormControl } from "./control/WaveFormControl";
+import { NoiseControl } from "./control/NoiseControl";
 import { SoundTrackList } from "./soundTrack/SoundTrackList";
+import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
+import { CreateSound } from "./CreateSound";
+import { useKeyPressListener } from "./useKeyPressListener";
 import { theme } from "./theme";
 
 // test
@@ -22,6 +25,8 @@ context.tracks[1] = testTrack[1];
 context.tracks[2] = testTrack[2];
 
 export const App = () => {
+    useKeyPressListener();
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -41,6 +46,8 @@ export const App = () => {
                     <Grid item xs={3}>
                         <FrequencyControl />
                         <WaveFormControl />
+                        <NoiseControl />
+                        <CreateSound />
                     </Grid>
                 </Grid>
             </UiContextProvider>
