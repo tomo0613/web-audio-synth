@@ -7,3 +7,4 @@ Resources:
 
 - Articles
   - [A tale of two clocks - Scheduling web audio with precision](https://web.dev/articles/audio-scheduling)
+  - [Synthesizing Drum Sounds with the Web Audio API](https://dev.opera.com/articles/drum-sounds-webaudio/)

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
+import { useKeyPressListener } from "@ui/context/useKeyPressListener";
 import { defaultContextValue, UiContext } from "./UiContext";
 import { ActionType as SetAmpEnvelopeStateActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 import { ActionType as SetPitchEnvelopeStateActionType, usePitchEnvelopeState } from "./usePitchEnvelopeState";
@@ -15,6 +16,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     const [pitchEnvelopeState, pitchEnvelopeDispatch] = usePitchEnvelopeState();
     const [trackSegmentCount, setTrackSegmentCount] = useState(getInitialSegmentCount());
     const progress = useProgress(defaultContextValue.progress);
+
+    useKeyPressListener();
 
     useEffect(() => {
         if (!selectedSound) {

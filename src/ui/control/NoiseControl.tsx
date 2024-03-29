@@ -1,26 +1,41 @@
-import { useState } from "react";
-import { FormControlLabel, Switch } from "@mui/material";
+import { Box, Slider, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { useUiContext } from "@ui/context/UiContext";
 
 export const NoiseControl = () => {
     const { selectedSound } = useUiContext();
-    const [noiseEnabled, setNoiseEnabled] = useState(false);
+    const [noiseVolume, setNoiseVolume] = useState(0);
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>, checked: boolean) {
-        setNoiseEnabled(checked);
+    useEffect(() => {
+        if (!selectedSound) {
+            return;
+        }
+
+        setNoiseVolume(selectedSound.noise);
+    }, [selectedSound]);
+
+    function handleNoiseVolumeChange(e: Event, value: number) {
+        setNoiseVolume(value);
 
         if (selectedSound) {
-            selectedSound.noise = checked;
+            selectedSound.noise = value;
         }
     }
 
     return (
-        <FormControlLabel 
-            label="Noise" 
-            control={(
-                <Switch checked={noiseEnabled} onChange={handleChange} disabled={!selectedSound} />
-            )} 
-        />
+        <Box>
+            <Typography>
+                Noise [ {noiseVolume} ]
+            </Typography>
+            <Slider
+                min={0}
+                max={1}
+                step={0.001}
+                value={noiseVolume}
+                onChange={handleNoiseVolumeChange}
+                sx={{ width: "100px" }}
+            />
+        </Box>
     );
 };

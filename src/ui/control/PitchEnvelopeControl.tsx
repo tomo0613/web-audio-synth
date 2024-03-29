@@ -47,6 +47,7 @@ export const PitchEnvelopeControl = () => {
                     name="initial"
                     value={pitchEnvelopeState.initial}
                     onChange={handleTextFieldChange}
+                    disabled={!selectedSound}
                 />
                 <TextField
                     type="number"
@@ -54,6 +55,7 @@ export const PitchEnvelopeControl = () => {
                     name="end"
                     value={pitchEnvelopeState.end}
                     onChange={handleTextFieldChange}
+                    disabled={!selectedSound}
                 />
                 <Box>
                     <Typography>
@@ -66,6 +68,7 @@ export const PitchEnvelopeControl = () => {
                         value={pitchEnvelopeState.time}
                         name="time"
                         onChange={handleSliderChange}
+                        disabled={!selectedSound}
                     />
                 </Box>
             </Stack>

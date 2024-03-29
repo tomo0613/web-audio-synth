@@ -36,12 +36,15 @@ export class PitchEnvelope {
 }
 
 export class FilterEnvelope {
-    enabled = false;
-    type: BiquadFilterType = "lowpass";
+    type: BiquadFilterType | undefined;
     frequency = 0;
     q = 0;
 
     init(filter: BiquadFilterNode) {
+        if (!this.type) {
+            return;
+        }
+
         filter.type = this.type;
         filter.frequency.value = this.frequency;
         filter.Q.value = this.q;

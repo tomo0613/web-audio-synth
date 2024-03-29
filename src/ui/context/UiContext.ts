@@ -7,7 +7,7 @@ import { Action as SetPitchEnvelopeStateAction, pitchEnvelopeDefaultState } from
 
 export const defaultContextValue = {
     selectedSound: null as Sound | null,
-    setSelectedSound: noop as React.Dispatch<React.SetStateAction<Sound>>,
+    setSelectedSound: noop as React.Dispatch<React.SetStateAction<Sound | null>>,
     selectedSegmentId: "",
     setSelectedSegmentId: noop as React.Dispatch<React.SetStateAction<string>>,
     frequency: 440,

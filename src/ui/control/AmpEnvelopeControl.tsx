@@ -33,7 +33,15 @@ export const AmpEnvelopeControl = () => {
                         <Typography>
                             {key} [ {value} ]
                         </Typography>
-                        <Slider min={0} max={1} step={0.001} value={value} name={key} onChange={handleChange} />
+                        <Slider
+                            min={0}
+                            max={1}
+                            step={0.001}
+                            value={value}
+                            name={key}
+                            onChange={handleChange}
+                            disabled={!selectedSound}
+                        />
                     </Box>
                 ))}
             </Stack>
