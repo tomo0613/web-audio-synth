@@ -7,12 +7,14 @@ import { testTrack } from "@core/testTrack";
 import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
 import { UiContextProvider } from "./context/UiContextProvider";
 import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
+import { EchoControl } from "./control/EchoControl";
 import { FilterEnvelopeControl } from "./control/FilterEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
 import { MasterVolumeControl } from "./control/MasterVolumeControl";
 import { NoiseControl } from "./control/NoiseControl";
 import { PitchEnvelopeControl } from "./control/PitchEnvelopeControl";
 import { PlayControl } from "./control/PlayControl";
+import { ReverbControl } from "./control/ReverbControl";
 import { TempoControl } from "./control/TempoControl";
 import { WaveFormControl } from "./control/WaveFormControl";
 import { CreateSound } from "./CreateSound";
@@ -50,6 +52,12 @@ export const App = () => {
                         <WaveFormControl />
                         <NoiseControl />
                         <CreateSound />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <ReverbControl />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <EchoControl />
                     </Grid>
                 </Grid>
             </UiContextProvider>

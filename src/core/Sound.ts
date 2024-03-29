@@ -1,6 +1,10 @@
 import { context } from "./context";
+import { AmpEnvelope } from "./envelope/AmpEnvelope";
+import { Echo } from "./envelope/Echo";
+import { FilterEnvelope } from "./envelope/FilterEnvelope";
+import { PitchEnvelope } from "./envelope/PitchEnvelope";
+import { Reverb } from "./envelope/Reverb";
 import { createNoiseSource } from "./noise";
-import { AmpEnvelope, FilterEnvelope, PitchEnvelope } from "./SoundEnvelope";
 
 let i = 0;
 
@@ -16,6 +20,9 @@ export class Sound {
         amp: new AmpEnvelope(),
         pitch: new PitchEnvelope(),
         filter: new FilterEnvelope(),
+
+        reverb: new Reverb(),
+        echo: new Echo(),
     };
 
     length: number;
@@ -49,17 +56,19 @@ export class Sound {
     }
 
     play(startTime: number, length: number) {
-        const ampEnvelopeGain = context.instance.createGain();
-        const noiseGain = context.instance.createGain();
-
         this.init();
 
         assertOscillator(this.oscillator);
 
-        this.envelopes.amp.init(ampEnvelopeGain, startTime, length);
+        const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
+
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
+        this.envelopes.echo.init(this.oscillator);
+        this.envelopes.reverb.init(ampEnvelopeGain);
 
         if (this.noise > 0) {
+            const noiseGain = context.instance.createGain();
+
             this.noiseSource = createNoiseSource();
             this.noiseSource.connect(noiseGain);
             this.noiseSource.start(startTime);
@@ -69,11 +78,9 @@ export class Sound {
             noiseGain.connect(ampEnvelopeGain);
         }
 
-        if (this.envelopes.filter.type) {
-            const filter = context.instance.createBiquadFilter();
+        const filter = this.envelopes.filter.init();
 
-            this.envelopes.filter.init(filter);
-
+        if (filter) {
             this.oscillator.connect(filter);
             filter.connect(ampEnvelopeGain);
         } else {

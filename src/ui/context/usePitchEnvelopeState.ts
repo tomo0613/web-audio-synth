@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-import type { PitchEnvelope } from "@core/SoundEnvelope";
+import type { PitchEnvelope } from "@core/envelope/PitchEnvelope";
 
 export enum ActionType {
     initializeForm = "initializeForm",
