@@ -17,19 +17,19 @@ export const EchoControl = () => {
             return;
         }
 
-        setTime(selectedSound.envelopes.echo.time);
-        setFeedback(selectedSound.envelopes.echo.feedback);
+        setTime(selectedSound.effects.delay.time);
+        setFeedback(selectedSound.effects.delay.feedback);
     }, [selectedSound]);
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.envelopes.echo.time = time;
+            selectedSound.effects.delay.time = time;
         }
     }, [time]);
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.envelopes.echo.feedback = feedback;
+            selectedSound.effects.delay.feedback = feedback;
         }
     }, [feedback]);
 

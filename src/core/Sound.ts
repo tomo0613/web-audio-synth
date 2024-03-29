@@ -1,9 +1,9 @@
 import { context } from "./context";
+import { Delay } from "./effect/Delay";
+import { Reverb } from "./effect/Reverb";
 import { AmpEnvelope } from "./envelope/AmpEnvelope";
-import { Echo } from "./envelope/Echo";
 import { FilterEnvelope } from "./envelope/FilterEnvelope";
 import { PitchEnvelope } from "./envelope/PitchEnvelope";
-import { Reverb } from "./envelope/Reverb";
 import { createNoiseSource } from "./noise";
 
 let i = 0;
@@ -20,9 +20,11 @@ export class Sound {
         amp: new AmpEnvelope(),
         pitch: new PitchEnvelope(),
         filter: new FilterEnvelope(),
+    };
 
+    effects = {
         reverb: new Reverb(),
-        echo: new Echo(),
+        delay: new Delay(),
     };
 
     length: number;
@@ -63,8 +65,8 @@ export class Sound {
         const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
 
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
-        this.envelopes.echo.init(this.oscillator);
-        this.envelopes.reverb.init(ampEnvelopeGain);
+        this.effects.delay.init(this.oscillator);
+        this.effects.reverb.init(ampEnvelopeGain);
 
         if (this.noise > 0) {
             const noiseGain = context.instance.createGain();

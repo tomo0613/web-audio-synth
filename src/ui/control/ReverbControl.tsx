@@ -18,26 +18,26 @@ export const ReverbControl = () => {
             return;
         }
 
-        setTime(selectedSound.envelopes.reverb.time);
-        setDecay(selectedSound.envelopes.reverb.decay);
-        setReverse(selectedSound.envelopes.reverb.reverse);
+        setTime(selectedSound.effects.reverb.time);
+        setDecay(selectedSound.effects.reverb.decay);
+        setReverse(selectedSound.effects.reverb.reverse);
     }, [selectedSound]);
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.envelopes.reverb.time = time;
+            selectedSound.effects.reverb.time = time;
         }
     }, [time]);
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.envelopes.reverb.decay = decay;
+            selectedSound.effects.reverb.decay = decay;
         }
     }, [decay]);
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.envelopes.reverb.reverse = reverse;
+            selectedSound.effects.reverb.reverse = reverse;
         }
     }, [reverse]);
 

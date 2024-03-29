@@ -1,6 +1,6 @@
 import { context } from "@core/context";
 
-export class Echo {
+export class Delay {
     time = 0;
     feedback = 0;
 
