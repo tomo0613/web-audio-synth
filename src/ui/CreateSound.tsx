@@ -40,6 +40,28 @@ const soundPresets = {
             },
         },
     },
+    "hi-hat_0": {
+        frequency: 0,
+        length: 1 / 16,
+        noise: 0.7,
+        envelopes: {
+            amp: {
+                decay: 0.032,
+                sustain: 0.4,
+                release: 0.032,
+            },
+            filter: {
+                type: "highpass",
+                frequency: 12000,
+            },
+        },
+        effects: {
+            reverb: {
+                time: 0.3,
+                decay: 0.7,
+            },
+        },
+    },
 };
 
 const propertyKeyMap = [
@@ -60,6 +82,13 @@ const propertyKeyMap = [
     "envelopes.filter.type",
     "envelopes.filter.frequency",
     "envelopes.filter.q",
+
+    "effects.reverb.time",
+    "effects.reverb.decay",
+    "effects.reverb.reverse",
+
+    "effects.delay.time",
+    "effects.delay.feedback",
 ];
 
 function findProperty<O extends object>(source: O, propertyKey: string) {

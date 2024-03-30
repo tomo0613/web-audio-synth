@@ -1,4 +1,4 @@
-import { DragIndicator } from "@mui/icons-material";
+import { DragIndicator, SwapHoriz } from "@mui/icons-material";
 import { Box, BoxProps, styled, type SxProps } from "@mui/material";
 import { useDrag } from "react-dnd";
 
@@ -22,6 +22,8 @@ const StyledSound = styled(Box, {
     position: "absolute",
     top: 4,
     height: `${trackHeight - 8}px`,
+    display: "flex",
+    justifyContent: "space-between",
     border: `1px solid ${theme.palette.common.white}`,
     borderRadius: theme.shape.borderRadius,
     boxSizing: "border-box",
@@ -39,16 +41,27 @@ interface SoundProps {
     columnIndex: number;
 }
 
-const dragHandleSx: SxProps = {
+const handleSx: SxProps = {
     width: segmentWidth / 2,
     height: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
-    cursor: "move",
     "& .MuiSvgIcon-root": {
         width: "inherit",
         height: "inherit",
     },
 };
+
+const dragHandleSx: SxProps = {
+    ...handleSx,
+    cursor: "move",
+};
+
+const resizeHandleSx: SxProps = {
+    ...handleSx,
+    cursor: "col-resize",
+};
+
+let originX = 0;
 
 export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) => {
     const { selectedSound, setSelectedSound } = useUiContext();
@@ -77,6 +90,41 @@ export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) =>
         setSelectedSound(sound);
     }
 
+    function resize(sign: number) {
+        const length = sound.length + sign * (1 / 16);
+
+        if (length <= 0) {
+            return;
+        }
+
+        sound.length = length;
+
+        changeListener.dispatch("change");
+    }
+
+    function handleMouseMove(e: MouseEvent) {
+        const currentX = e.screenX;
+        const deltaX = currentX - originX;
+
+        if (deltaX <= -segmentWidth || deltaX >= segmentWidth) {
+            resize(Math.sign(deltaX));
+
+            originX = currentX;
+        }
+    }
+
+    function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+        originX = e.screenX;
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseup", handleMouseUp);
+    }
+
+    function handleMouseUp(e: MouseEvent) {
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
+    }
+
     return (
         <StyledSound
             onClick={handleClick}
@@ -89,6 +137,9 @@ export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) =>
             {/* {sound.id} */}
             <Box sx={dragHandleSx} role="Handle" ref={drag}>
                 <DragIndicator />
+            </Box>
+            <Box sx={resizeHandleSx} onMouseDown={handleMouseDown}>
+                <SwapHoriz />
             </Box>
         </StyledSound>
     );
