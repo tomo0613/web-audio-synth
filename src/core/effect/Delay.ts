@@ -5,14 +5,19 @@ export class Delay {
     feedback = 0;
 
     init(input: AudioNode) {
-        // const delayNode = context.instance.createDelay();
-        // const gainNode = context.instance.createGain();
+        if (!(this.time > 0)) {
+            return;
+        }
 
-        // delayNode.delayTime.value = this.time;
-        // gainNode.gain.value = this.feedback;
+        const delayNode = context.instance.createDelay();
+        const gainNode = context.instance.createGain();
 
-        // input.connect(delayNode);
-        // delayNode.connect(gainNode);
-        // gainNode.connect(delayNode);
+        delayNode.delayTime.value = this.time;
+        gainNode.gain.value = this.feedback;
+
+        delayNode.connect(gainNode);
+        gainNode.connect(delayNode);
+        input.connect(delayNode);
+        delayNode.connect(context.gainNode);
     }
 }

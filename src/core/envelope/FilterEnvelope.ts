@@ -5,7 +5,7 @@ export class FilterEnvelope {
     frequency = 0;
     q = 0;
 
-    init() {
+    init(input: AudioNode) {
         if (!this.type) {
             return;
         }
@@ -16,6 +16,8 @@ export class FilterEnvelope {
         filterNode.frequency.value = this.frequency;
         filterNode.Q.value = this.q;
 
-        return filterNode;
+        input.connect(filterNode);
+
+        filterNode.connect(context.gainNode);
     }
 }

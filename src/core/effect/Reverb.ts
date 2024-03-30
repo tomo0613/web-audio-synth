@@ -1,31 +1,50 @@
 import { context } from "@core/context";
 
+const bufferCache = {};
+
+function createReverbBuffer(time: number, decay: number, reverse: boolean) {
+    const bufferSize = time * context.instance.sampleRate;
+    const reverbBuffer = context.instance.createBuffer(2, bufferSize, context.instance.sampleRate);
+    const channelLeftData = reverbBuffer.getChannelData(0);
+    const channelRightData = reverbBuffer.getChannelData(1);
+
+    for (let i = 0; i < bufferSize; i++) {
+        const n = reverse ? bufferSize - i : i;
+
+        channelLeftData[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / bufferSize, decay);
+        channelRightData[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / bufferSize, decay);
+    }
+    return reverbBuffer;
+}
+
 export class Reverb {
     time = 0;
     decay = 0;
     reverse = false;
 
     init(input: AudioNode) {
-        if (this.time < Number.EPSILON) {
+        if (!(this.time > 0)) {
             return;
         }
 
         const convolverNode = context.instance.createConvolver();
 
-        const bufferSize = this.time * context.instance.sampleRate;
-        const reverbBuffer = context.instance.createBuffer(2, bufferSize, context.instance.sampleRate);
-        const channelLeftData = reverbBuffer.getChannelData(0);
-        const channelRightData = reverbBuffer.getChannelData(1);
+        convolverNode.buffer = this.createBuffer();
+        convolverNode.connect(context.gainNode);
+        input.connect(convolverNode);
+    }
 
-        for (let i = 0; i < bufferSize; i++) {
-            const n = this.reverse ? bufferSize - i : i;
+    private createBuffer() {
+        const cacheKey = `${this.time},${this.decay},${this.reverse}`;
 
-            channelLeftData[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / bufferSize, this.decay);
-            channelRightData[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / bufferSize, this.decay);
+        if (bufferCache[cacheKey]) {
+            return bufferCache[cacheKey];
         }
 
-        convolverNode.buffer = reverbBuffer;
-        convolverNode.connect(context.instance.destination);
-        input.connect(convolverNode);
+        const buffer = createReverbBuffer(this.time, this.decay, this.reverse);
+
+        bufferCache[cacheKey] = buffer;
+
+        return buffer;
     }
 }

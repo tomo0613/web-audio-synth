@@ -107,7 +107,7 @@ function setSoundProperties(sound: Sound, selectedSoundPreset: string, selectedS
 }
 
 export const CreateSound = () => {
-    const { selectedSound, setSelectedSound, selectedSegmentId } = useUiContext();
+    const { selectedSound, deleteSelectedSound, selectedSegmentId } = useUiContext();
     const [selectedSoundPreset, setSelectedSoundPreset] = useState("default");
 
     function handleSelect(e: React.ChangeEvent<HTMLInputElement>) {
@@ -132,27 +132,7 @@ export const CreateSound = () => {
     }
 
     function handleDelete() {
-        if (!selectedSound) {
-            return;
-        }
-
-        let position: number | undefined = undefined;
-
-        const selectedTrack = context.tracks.find((track) => {
-            position = getMapKeyByValue<number, Sound>(track.sounds, selectedSound);
-
-            return position !== undefined;
-        });
-
-        if (!selectedTrack || !position) {
-            return;
-        }
-
-        selectedTrack.remove(position);
-
-        setSelectedSound(null);
-
-        changeListener.dispatch("change");
+        deleteSelectedSound();
     }
 
     return (
@@ -186,11 +166,3 @@ export const CreateSound = () => {
         </Box>
     );
 };
-
-function getMapKeyByValue<K, V, M extends Map<K, V> = Map<K, V>>(map: M, item: V): K | undefined {
-    for (let [key, value] of map.entries()) {
-        if (value === item) {
-            return key;
-        }
-    }
-}

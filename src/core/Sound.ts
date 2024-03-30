@@ -65,7 +65,9 @@ export class Sound {
         const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
 
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
-        this.effects.delay.init(this.oscillator);
+        this.envelopes.filter.init(ampEnvelopeGain);
+
+        this.effects.delay.init(ampEnvelopeGain);
         this.effects.reverb.init(ampEnvelopeGain);
 
         if (this.noise > 0) {
@@ -80,15 +82,7 @@ export class Sound {
             noiseGain.connect(ampEnvelopeGain);
         }
 
-        const filter = this.envelopes.filter.init();
-
-        if (filter) {
-            this.oscillator.connect(filter);
-            filter.connect(ampEnvelopeGain);
-        } else {
-            this.oscillator.connect(ampEnvelopeGain);
-        }
-
+        this.oscillator.connect(ampEnvelopeGain);
         ampEnvelopeGain.connect(context.gainNode);
 
         this.oscillator.start(startTime);

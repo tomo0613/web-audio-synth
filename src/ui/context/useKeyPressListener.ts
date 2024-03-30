@@ -1,24 +1,27 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
-import { context } from "@core/context";
-import type { Sound } from "@core/Sound";
+type KeyListeners = Record<string, () => void>;
 
-function onKeyUp(e: KeyboardEvent) {
-    if (e.code === "Space") {
-        context.scheduler.toggle();
-    }
+const inputNodes = ["BUTTON", "INPUT", "LI"];
 
-    if (e.code === "Delete") {
-        // context.scheduler.toggle();
-    }
-}
+export function useKeyPressListener(keyListeners: KeyListeners) {
+    const onKeyUp = useCallback((e: KeyboardEvent) => {
+        if (e.target instanceof Element && inputNodes.includes(e.target.nodeName)) {
+            return;
+        }
 
-export function useKeyPressListener() {
+        const callback = keyListeners[e.code];
+
+        if (callback) {
+            callback();
+        }
+    }, [keyListeners]);
+
     useEffect(() => {
         window.addEventListener("keyup", onKeyUp);
 
         return () => {
             window.removeEventListener("keyup", onKeyUp);
         };
-    }, []);
+    }, [onKeyUp]);
 }
