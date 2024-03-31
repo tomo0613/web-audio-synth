@@ -7,7 +7,7 @@ const oscillatorTypes: OscillatorType[] = [
     "sine",
     "square",
     "triangle",
-    // "custom",
+    "custom",
 ];
 
 function assertValue(value: string): asserts value is OscillatorType {

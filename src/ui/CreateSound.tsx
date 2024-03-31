@@ -42,23 +42,40 @@ const soundPresets = {
     },
     "hi-hat_0": {
         frequency: 0,
-        length: 1 / 16,
-        noise: 0.7,
+        length: 1 / 8,
+        noise: 1,
         envelopes: {
             amp: {
-                decay: 0.032,
-                sustain: 0.4,
-                release: 0.032,
+                decay: 0.06,
+                sustain: 0,
             },
             filter: {
                 type: "highpass",
-                frequency: 12000,
+                frequency: 9000,
             },
         },
         effects: {
             reverb: {
                 time: 0.3,
-                decay: 0.7,
+                decay: 0.3,
+                reverse: true,
+            },
+        },
+    },
+    "hi-hat_1": {
+        frequency: 0,
+        length: 1 / 8,
+        noise: 1,
+        envelopes: {
+            amp: {
+                attack: 0.001,
+                decay: 0.05,
+                sustain: 0,
+                release: 0.2,
+            },
+            filter: {
+                type: "highpass",
+                frequency: 5000,
             },
         },
     },
