@@ -45,7 +45,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
 
         let position: number | undefined = undefined;
 
-        const selectedTrack = context.tracks.find((track) => {
+        const selectedTrack = context.scheduler.tracks.find((track) => {
             position = getMapKeyByValue<number, Sound>(track.sounds, selectedSound);
 
             return position !== undefined;
@@ -64,7 +64,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
 
     function createSound() {
         const [rowIndex, columnIndex] = selectedSegmentId.split("/").map(Number);
-        const selectedTrack = context.tracks[rowIndex];
+        const selectedTrack = context.scheduler.tracks[rowIndex];
 
         if (selectedTrack.sounds.has(columnIndex)) {
             return;
@@ -119,7 +119,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
 };
 
 function getInitialSegmentCount() {
-    return context.tracks.reduce((n, track) => Math.max(n, track.lastPosition || 0), 0);
+    return context.scheduler.tracks.reduce((n, track) => Math.max(n, track.lastPosition || 0), 0);
 }
 
 function getMapKeyByValue<K, V, M extends Map<K, V> = Map<K, V>>(map: M, item: V): K | undefined {

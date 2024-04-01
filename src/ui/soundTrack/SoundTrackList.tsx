@@ -45,8 +45,8 @@ export const SoundTrackList = () => {
     return (
         <DndProvider backend={HTML5Backend}>
             <Stack divider={<Divider />} sx={soundTrackListSx}>
-                <SoundtrackProgress />
-                {context.tracks.map((track, i) => <SoundTrack key={track.id} track={track} index={i} />)}
+                {/* <SoundtrackProgress /> */}
+                {context.scheduler.tracks.map((track, i) => <SoundTrack key={track.id} track={track} index={i} />)}
             </Stack>
         </DndProvider>
     );

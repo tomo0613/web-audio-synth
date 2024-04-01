@@ -78,8 +78,8 @@ export const Sound: React.FC<SoundProps> = ({ sound, rowIndex, columnIndex }) =>
             const dropResult = monitor.getDropResult<{ rowIndex: number; columnIndex: number } | null>();
 
             if (dropResult) {
-                context.tracks[rowIndex].remove(columnIndex);
-                context.tracks[dropResult.rowIndex].add(sound, dropResult.columnIndex);
+                context.scheduler.tracks[rowIndex].remove(columnIndex);
+                context.scheduler.tracks[dropResult.rowIndex].add(sound, dropResult.columnIndex);
 
                 changeListener.dispatch("change");
             }

@@ -21,7 +21,7 @@ export class Scheduler {
     listener = new EventListener<"start" | "stop">();
     private active = false;
     private audioContext: AudioContext;
-    private tracks: SoundTrack[];
+    private _tracks: SoundTrack[];
     private currentPosition = 0;
     private startTime = 0;
     private nextSoundStartTime = 0;
@@ -45,9 +45,16 @@ export class Scheduler {
         return this._timeStep;
     }
 
-    constructor(audioContext: AudioContext, tracks: SoundTrack[]) {
+    get tracks() {
+        return this._tracks;
+    }
+
+    set tracks(value: SoundTrack[]) {
+        this._tracks = value;
+    }
+
+    constructor(audioContext: AudioContext) {
         this.audioContext = audioContext;
-        this.tracks = tracks;
     }
 
     start() {
@@ -103,10 +110,18 @@ export class Scheduler {
         this.currentPosition++;
         this.nextSoundStartTime += this.timeStep;
 
-        const absoluteLastPosition = this.tracks.reduce((lastPosition, track) => (
-            Math.max(lastPosition, track.lastPosition || 0)
-        ), 0);
-        const lastStep = this.currentPosition > absoluteLastPosition;
+        const endPosition = this._tracks.reduce((result, track) => {
+            if (track.lastPosition === undefined) {
+                return result;
+            }
+
+            const lastSound = track.sounds.get(track.lastPosition)!;
+            const trackEndPosition = track.lastPosition + lastSound.length * 16;
+
+            return Math.max(result, trackEndPosition);
+        }, 0);
+
+        const lastStep = this.currentPosition > endPosition;
 
         if (lastStep) {
             if (this.loop) {
@@ -118,7 +133,7 @@ export class Scheduler {
     }
 
     private playAtTime(startTime: number) {
-        this.tracks.forEach(({ sounds }) => {
+        this._tracks.forEach(({ sounds }) => {
             const sound = sounds.get(this.currentPosition);
 
             if (!sound) {

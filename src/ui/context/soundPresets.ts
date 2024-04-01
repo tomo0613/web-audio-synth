@@ -3,7 +3,7 @@ import type { Sound } from "@core/Sound";
 export const soundPresets = {
     "kick_0": {
         frequency: 130.81,
-        length: 1 / 4,
+        length: 1 / 8,
         envelopes: {
             amp: {
                 attack: 0.03,

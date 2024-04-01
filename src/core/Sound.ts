@@ -67,7 +67,7 @@ export class Sound {
         const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
 
         this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
-        this.envelopes.filter.init(ampEnvelopeGain);
+        this.envelopes.filter.init(ampEnvelopeGain, context.gainNode);
 
         this.effects.delay.init(ampEnvelopeGain);
         this.effects.reverb.init(ampEnvelopeGain);

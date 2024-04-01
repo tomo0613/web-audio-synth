@@ -33,7 +33,7 @@ export function useProgress(defaultValue: number) {
     }
 
     function updateProgress() {
-        const endTime = startTime + context.tracks.reduce(aggregateEndTime, 0);
+        const endTime = startTime + context.scheduler.tracks.reduce(aggregateEndTime, 0);
         const total = endTime - startTime;
         const current = context.instance.currentTime - startTime;
 

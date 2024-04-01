@@ -22,10 +22,7 @@ import { SoundTrackList } from "./soundTrack/SoundTrackList";
 import { theme } from "./theme";
 
 // test
-context.tracks[0] = testTrack[0];
-context.tracks[1] = testTrack[1];
-context.tracks[2] = testTrack[2];
-context.tracks[3] = testTrack[3];
+context.scheduler.tracks = testTrack.slice(0, 4);
 
 export const App = () => {
     return (

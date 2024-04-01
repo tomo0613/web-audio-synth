@@ -44,7 +44,7 @@ interface SegmentProps extends BoxProps {
 }
 
 const Segment: React.FC<SegmentProps> = ({ rowIndex, columnIndex }) => {
-    const id = `${rowIndex}/${columnIndex}`
+    const id = `${rowIndex}/${columnIndex}`;
     const { progress, selectedSegmentId, setSelectedSegmentId } = useUiContext();
     const activeSegmentIndex = progress; // ToDo
 
@@ -56,7 +56,7 @@ const Segment: React.FC<SegmentProps> = ({ rowIndex, columnIndex }) => {
         }),
         canDrop() {
             // ToDo + length
-            return !context.tracks[rowIndex].sounds.has(columnIndex);
+            return !context.scheduler.tracks[rowIndex].sounds.has(columnIndex);
         },
         drop() {
             return { rowIndex, columnIndex };
@@ -68,7 +68,7 @@ const Segment: React.FC<SegmentProps> = ({ rowIndex, columnIndex }) => {
     }
 
     return (
-        <StyledSegment 
+        <StyledSegment
             selected={selectedSegmentId === id}
             onClick={handleClick}
             active={columnIndex === activeSegmentIndex}
