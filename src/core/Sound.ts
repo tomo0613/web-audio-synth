@@ -5,6 +5,7 @@ import { AmpEnvelope } from "./envelope/AmpEnvelope";
 import { FilterEnvelope } from "./envelope/FilterEnvelope";
 import { PitchEnvelope } from "./envelope/PitchEnvelope";
 import { createNoiseSource } from "./noise";
+import periodicWave from "./periodicWave/periodicWave";
 
 let i = 0;
 
@@ -33,9 +34,11 @@ export class Sound {
 
     waveForm: OscillatorType = "sine";
 
-    oscillator: OscillatorNode | null = null;
+    periodicWaveId: keyof typeof periodicWave = "organ";
 
-    noiseSource: AudioBufferSourceNode | null = null;
+    private oscillator: OscillatorNode | null = null;
+
+    private noiseSource: AudioBufferSourceNode | null = null;
 
     noise = 0;
 
@@ -48,8 +51,7 @@ export class Sound {
         const oscillator = context.instance.createOscillator();
 
         if (this.waveForm === "custom") {
-            throw new Error("ToDo implement customWave: PeriodicWave");
-            // oscillator.setPeriodicWave(customWave);
+            oscillator.setPeriodicWave(periodicWave[this.periodicWaveId]);
         } else {
             oscillator.type = this.waveForm;
         }

@@ -1,5 +1,6 @@
 import { Box, Card, Divider, MenuItem, Slider, Stack, SxProps, TextField, Typography } from "@mui/material";
 
+import { context } from "@core/context";
 import { useUiContext } from "@ui/context/UiContext";
 import { useEffect, useState } from "react";
 
@@ -24,21 +25,19 @@ function assertFilterTypeValue(value?: string): asserts value is BiquadFilterTyp
     }
 }
 
-const numberInputProps = {
-    min: 0,
-};
-
 export const FilterEnvelopeControl = () => {
     const { selectedSound } = useUiContext();
     const [filterType, setFilterType] = useState<BiquadFilterType | "disabled">("disabled");
     const [frequency, setFrequency] = useState(0);
     const [qFactor, setQFactor] = useState(0);
+    const [detune, setDetune] = useState(0);
 
     useEffect(() => {
         if (selectedSound) {
             setFilterType(selectedSound.envelopes.filter.type || "disabled");
             setFrequency(selectedSound.envelopes.filter.frequency);
             setQFactor(selectedSound.envelopes.filter.q);
+            setDetune(selectedSound.envelopes.filter.detune);
         }
     }, [selectedSound]);
 
@@ -54,12 +53,8 @@ export const FilterEnvelopeControl = () => {
         setFilterType(value || "disabled");
     }
 
-    function handleFrequencyChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const value = Number(e.target.value);
-
-        if (Number.isNaN(value)) {
-            console.error(`frequency: ${e.target.value} is not a valid`);
-        } else if (selectedSound) {
+    function handleFrequencyChange(e: Event, value: number) {
+        if (selectedSound) {
             selectedSound.envelopes.filter.frequency = value;
         }
 
@@ -72,6 +67,14 @@ export const FilterEnvelopeControl = () => {
         }
 
         setQFactor(value);
+    }
+
+    function handleDetuneChange(e: Event, value: number) {
+        if (selectedSound) {
+            selectedSound.envelopes.filter.detune = value;
+        }
+
+        setDetune(value);
     }
 
     return (
@@ -99,14 +102,19 @@ export const FilterEnvelopeControl = () => {
                         </MenuItem>
                     ))}
                 </TextField>
-                <TextField
-                    label="Frequency"
-                    onChange={handleFrequencyChange}
-                    type="number"
-                    value={frequency}
-                    disabled={!selectedSound}
-                    inputProps={numberInputProps}
-                />
+                <Box>
+                    <Typography>
+                        Frequency [ {frequency} ]
+                    </Typography>
+                    <Slider
+                        min={0}
+                        max={context.instance.sampleRate / 2}
+                        step={1}
+                        value={frequency}
+                        onChange={handleFrequencyChange}
+                        disabled={!selectedSound}
+                    />
+                </Box>
                 <Box>
                     <Typography>
                         Q [ {qFactor} ]
@@ -117,6 +125,19 @@ export const FilterEnvelopeControl = () => {
                         step={0.001}
                         value={qFactor}
                         onChange={handleQFactorChange}
+                        disabled={!selectedSound}
+                    />
+                </Box>
+                <Box>
+                    <Typography>
+                        Detune [ {detune} ]
+                    </Typography>
+                    <Slider
+                        min={0}
+                        max={10000}
+                        step={1}
+                        value={detune}
+                        onChange={handleDetuneChange}
                         disabled={!selectedSound}
                     />
                 </Box>

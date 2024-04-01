@@ -4,6 +4,7 @@ export class FilterEnvelope {
     type: BiquadFilterType | undefined;
     frequency = 0;
     q = 0;
+    detune = 0;
 
     init(input: AudioNode) {
         if (!this.type) {
@@ -15,6 +16,7 @@ export class FilterEnvelope {
         filterNode.type = this.type;
         filterNode.frequency.value = this.frequency;
         filterNode.Q.value = this.q;
+        filterNode.detune.value = this.detune;
 
         input.connect(filterNode);
 

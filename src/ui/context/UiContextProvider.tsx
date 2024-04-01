@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { context } from "@core/context";
-import type { Sound } from "@core/Sound";
+import { Sound } from "@core/Sound";
 import { useKeyPressListener } from "@ui/context/useKeyPressListener";
 import changeListener from "./changeListener";
+import { setSoundProperties } from "./soundPresets";
 import { defaultContextValue, UiContext } from "./UiContext";
 import { ActionType as SetAmpEnvelopeStateActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 import { ActionType as SetPitchEnvelopeStateActionType, usePitchEnvelopeState } from "./usePitchEnvelopeState";
@@ -12,6 +13,7 @@ import { useProgress } from "./useProgress";
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [selectedSound, setSelectedSound] = useState(defaultContextValue.selectedSound);
     const [selectedSegmentId, setSelectedSegmentId] = useState(defaultContextValue.selectedSegmentId);
+    const [selectedSoundPreset, setSelectedSoundPreset] = useState(defaultContextValue.selectedSoundPreset);
     const [frequency, setFrequency] = useState(defaultContextValue.frequency);
     const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
     const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
@@ -49,7 +51,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
             return position !== undefined;
         });
 
-        if (!selectedTrack || !position) {
+        if (!selectedTrack || position === undefined) {
             return;
         }
 
@@ -60,10 +62,28 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         changeListener.dispatch("change");
     }, [selectedSound]);
 
+    function createSound() {
+        const [rowIndex, columnIndex] = selectedSegmentId.split("/").map(Number);
+        const selectedTrack = context.tracks[rowIndex];
+
+        if (selectedTrack.sounds.has(columnIndex)) {
+            return;
+        }
+
+        const sound = new Sound();
+
+        setSoundProperties(sound, selectedSoundPreset, selectedSound);
+
+        selectedTrack.add(sound, columnIndex);
+
+        changeListener.dispatch("change");
+    }
+
     const keyListeners = useMemo(() => ({
         "Space": () => {
             context.scheduler.toggle();
         },
+        "NumpadAdd": createSound,
         "Delete": deleteSelectedSound,
     }), [deleteSelectedSound]);
 
@@ -75,6 +95,9 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         deleteSelectedSound,
         selectedSegmentId,
         setSelectedSegmentId,
+        selectedSoundPreset,
+        setSelectedSoundPreset,
+        createSound,
         frequency,
         setFrequency,
         waveForm,

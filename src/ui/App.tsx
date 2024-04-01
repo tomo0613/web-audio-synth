@@ -32,12 +32,21 @@ export const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <UiContextProvider>
-                <MasterVolumeControl />
-                <TempoControl />
-                <PlayControl />
-                <SoundTrackList />
-                <AudioAnalyserDisplay />
                 <Grid container spacing={4}>
+                    <Grid item xs={3}>
+                        <MasterVolumeControl />
+                        <TempoControl />
+                        <PlayControl />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <AudioAnalyserDisplay />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <CreateSound />
+                    </Grid>
+                </Grid>
+                <SoundTrackList />
+                <Grid container spacing={4} mt={4}>
                     <Grid item xs={3}>
                         <AmpEnvelopeControl />
                     </Grid>
@@ -51,7 +60,6 @@ export const App = () => {
                         <FrequencyControl />
                         <WaveFormControl />
                         <NoiseControl />
-                        <CreateSound />
                     </Grid>
                     <Grid item xs={3}>
                         <ReverbControl />

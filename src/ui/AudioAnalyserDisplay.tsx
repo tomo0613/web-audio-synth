@@ -2,6 +2,11 @@ import { context } from "@core/context";
 import { Box } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
+const style = {
+    color: "rgb(26, 213, 216)",
+    backgroundColor: "rgb(0, 0, 0)",
+};
+
 function initAnalyser(audioContext: AudioContext, gainNode: GainNode) {
     const analyser = audioContext.createAnalyser();
     const analyserDataBuffer = new Uint8Array(analyser.frequencyBinCount);
@@ -30,11 +35,11 @@ export const AudioAnalyserDisplay = () => {
 
         analyser.getByteTimeDomainData(analyserDataBuffer);
 
-        drawContext.fillStyle = "rgb(200, 200, 200)";
+        drawContext.fillStyle = style.backgroundColor;
         drawContext.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
         drawContext.lineWidth = 2;
-        drawContext.strokeStyle = "rgb(0, 0, 0)";
+        drawContext.strokeStyle = style.color;
 
         drawContext.beginPath();
 
