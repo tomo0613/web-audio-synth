@@ -85,7 +85,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         },
         "NumpadAdd": createSound,
         "Delete": deleteSelectedSound,
-    }), [deleteSelectedSound]);
+    }), [deleteSelectedSound, createSound]);
 
     useKeyPressListener(keyListeners);
 
