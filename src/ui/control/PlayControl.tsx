@@ -1,8 +1,19 @@
 import { LoopOutlined, PlayCircleOutlined, StopCircleOutlined } from "@mui/icons-material";
-import { IconButton, Stack } from "@mui/material";
+import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { context } from "@core/context";
+
+const ButtonTooltip = ({ text, hotKey }: { text: string; hotKey: string }) => (
+    <>
+        <Typography variant="inherit">
+            {text}
+        </Typography>
+        <Typography variant="inherit" color="text.secondary">
+            [ {hotKey} ]
+        </Typography>
+    </>
+);
 
 export const PlayControl = () => {
     const [loop, setLoop] = useState(context.scheduler.loop);
@@ -44,15 +55,21 @@ export const PlayControl = () => {
 
     return (
         <Stack spacing={2} direction="row" sx={{ mb: 4 }} alignItems="center">
-            <IconButton onClick={handleToggleLoop} color={loop ? "primary" : "default"}>
-                <LoopOutlined />
-            </IconButton>
-            <IconButton onClick={handlePlay} color={play ? "primary" : "default"}>
-                <PlayCircleOutlined />
-            </IconButton>
-            <IconButton onClick={handleStop}>
-                <StopCircleOutlined />
-            </IconButton>
+            <Tooltip title="Repeat ( on / off )">
+                <IconButton onClick={handleToggleLoop} color={loop ? "primary" : "default"}>
+                    <LoopOutlined />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={<ButtonTooltip text="Play" hotKey="Space" />}>
+                <IconButton onClick={handlePlay} color={play ? "primary" : "default"}>
+                    <PlayCircleOutlined />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={<ButtonTooltip text="Stop" hotKey="Space" />}>
+                <IconButton onClick={handleStop}>
+                    <StopCircleOutlined />
+                </IconButton>
+            </Tooltip>
         </Stack>
     );
 };

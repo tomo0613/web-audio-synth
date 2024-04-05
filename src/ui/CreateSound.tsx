@@ -1,8 +1,32 @@
 import { Add, DeleteForever } from "@mui/icons-material";
-import { Box, Divider, IconButton, MenuItem, TextField } from "@mui/material";
+import { Box, Divider, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
 
 import { soundPresets } from "@ui/context/soundPresets";
 import { useUiContext } from "@ui/context/UiContext";
+
+const ButtonTooltipContent = ({ text, hotKey }: { text: string; hotKey: string }) => (
+    <>
+        <Typography variant="inherit">
+            {text}
+        </Typography>
+        <Typography variant="inherit" color="text.secondary">
+            [ {hotKey} ]
+        </Typography>
+    </>
+);
+
+interface ButtonTooltipProps extends React.PropsWithChildren {
+    text: string;
+    hotKey: string;
+}
+
+const ButtonTooltip: React.FC<ButtonTooltipProps> = ({ children, text, hotKey }) => (
+    <Tooltip title={<ButtonTooltipContent text={text} hotKey={hotKey} />}>
+        <span>
+            {children}
+        </span>
+    </Tooltip>
+);
 
 export const CreateSound = () => {
     const {
@@ -48,12 +72,16 @@ export const CreateSound = () => {
                     </MenuItem>
                 ))}
             </TextField>
-            <IconButton onClick={handleAdd} disabled={!selectedSegmentId}>
-                <Add />
-            </IconButton>
-            <IconButton onClick={handleDelete} disabled={!selectedSound}>
-                <DeleteForever />
-            </IconButton>
+            <ButtonTooltip text="Create new sound (by preset, at selected segment)" hotKey="Numpad +">
+                <IconButton onClick={handleAdd} disabled={!selectedSegmentId}>
+                    <Add />
+                </IconButton>
+            </ButtonTooltip>
+            <ButtonTooltip text="Delete selected sound" hotKey="Del">
+                <IconButton onClick={handleDelete} disabled={!selectedSound}>
+                    <DeleteForever />
+                </IconButton>
+            </ButtonTooltip>
         </Box>
     );
 };

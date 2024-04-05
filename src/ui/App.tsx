@@ -16,6 +16,7 @@ import { PitchEnvelopeControl } from "./control/PitchEnvelopeControl";
 import { PlayControl } from "./control/PlayControl";
 import { ReverbControl } from "./control/ReverbControl";
 import { TempoControl } from "./control/TempoControl";
+import { UnisonControl } from "./control/UnisonControl";
 import { WaveFormControl } from "./control/WaveFormControl";
 import { CreateSound } from "./CreateSound";
 import { SoundTrackList } from "./soundTrack/SoundTrackList";
@@ -63,6 +64,9 @@ export const App = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <EchoControl />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <UnisonControl />
                     </Grid>
                 </Grid>
             </UiContextProvider>

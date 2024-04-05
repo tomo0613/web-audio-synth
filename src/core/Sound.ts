@@ -1,6 +1,7 @@
 import { context } from "./context";
 import { Delay } from "./effect/Delay";
 import { Reverb } from "./effect/Reverb";
+import { Unison } from "./effect/Unison";
 import { AmpEnvelope } from "./envelope/AmpEnvelope";
 import { FilterEnvelope } from "./envelope/FilterEnvelope";
 import { PitchEnvelope } from "./envelope/PitchEnvelope";
@@ -26,6 +27,7 @@ export class Sound {
     effects = {
         reverb: new Reverb(),
         delay: new Delay(),
+        unison: new Unison(),
     };
 
     length: number;
@@ -36,7 +38,7 @@ export class Sound {
 
     periodicWaveId: keyof typeof periodicWave = "organ";
 
-    private oscillator: OscillatorNode | null = null;
+    private readonly oscillators: OscillatorNode[] = [];
 
     private noiseSource: AudioBufferSourceNode | null = null;
 
@@ -48,29 +50,26 @@ export class Sound {
     }
 
     private init() {
-        const oscillator = context.instance.createOscillator();
-
-        if (this.waveForm === "custom") {
-            oscillator.setPeriodicWave(periodicWave[this.periodicWaveId]);
-        } else {
-            oscillator.type = this.waveForm;
-        }
-
-        this.oscillator = oscillator;
+        this.oscillators.forEach((oscillator) => {
+            if (this.waveForm === "custom") {
+                oscillator.setPeriodicWave(periodicWave[this.periodicWaveId]);
+            } else {
+                oscillator.type = this.waveForm;
+            }
+        });
     }
 
     play(startTime: number, length: number) {
-        this.init();
-
-        assertOscillator(this.oscillator);
-
         const ampEnvelopeGain = this.envelopes.amp.init(startTime, length);
+        this.effects.unison.init(ampEnvelopeGain, this.oscillators, this.frequency);
 
-        this.envelopes.pitch.init(this.oscillator, startTime, this.frequency);
-        this.envelopes.filter.init(ampEnvelopeGain, context.gainNode);
+        this.envelopes.pitch.init(this.oscillators, startTime);
+        this.envelopes.filter.init(ampEnvelopeGain);
 
         this.effects.delay.init(ampEnvelopeGain);
         this.effects.reverb.init(ampEnvelopeGain);
+
+        this.init();
 
         if (this.noise > 0) {
             const noiseGain = context.instance.createGain();
@@ -84,25 +83,18 @@ export class Sound {
             noiseGain.connect(ampEnvelopeGain);
         }
 
-        this.oscillator.connect(ampEnvelopeGain);
         ampEnvelopeGain.connect(context.gainNode);
 
-        this.oscillator.start(startTime);
+        this.oscillators.forEach((oscillator) => oscillator.start(startTime));
     }
 
     stop(stopTime?: number) {
-        assertOscillator(this.oscillator);
         // ampEnvelopeGain.gain.cancelScheduledValues(stopTime);
-        this.oscillator.stop(stopTime);
+        this.oscillators.forEach((oscillator) => oscillator.stop(stopTime));
+        this.oscillators.length = 0;
 
         if (this.noiseSource) {
             this.noiseSource.stop(stopTime);
         }
-    }
-}
-
-function assertOscillator(oscillator: OscillatorNode | null): asserts oscillator is OscillatorNode {
-    if (!oscillator) {
-        throw new Error("oscillator is null");
     }
 }

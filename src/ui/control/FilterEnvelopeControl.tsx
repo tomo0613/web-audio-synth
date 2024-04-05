@@ -1,4 +1,16 @@
-import { Box, Card, Divider, MenuItem, Slider, Stack, SxProps, TextField, Typography } from "@mui/material";
+import {
+    Box,
+    Card,
+    Divider,
+    FormControlLabel,
+    MenuItem,
+    Slider,
+    Stack,
+    Switch,
+    SxProps,
+    TextField,
+    Typography,
+} from "@mui/material";
 
 import { context } from "@core/context";
 import { useUiContext } from "@ui/context/UiContext";
@@ -31,6 +43,7 @@ export const FilterEnvelopeControl = () => {
     const [frequency, setFrequency] = useState(0);
     const [qFactor, setQFactor] = useState(0);
     const [detune, setDetune] = useState(0);
+    const [_24dB, set_24dB] = useState(false);
 
     useEffect(() => {
         if (selectedSound) {
@@ -38,6 +51,7 @@ export const FilterEnvelopeControl = () => {
             setFrequency(selectedSound.envelopes.filter.frequency);
             setQFactor(selectedSound.envelopes.filter.q);
             setDetune(selectedSound.envelopes.filter.detune);
+            set_24dB(selectedSound.envelopes.filter._24dB);
         }
     }, [selectedSound]);
 
@@ -75,6 +89,14 @@ export const FilterEnvelopeControl = () => {
         }
 
         setDetune(value);
+    }
+
+    function handle_24Change(e: React.ChangeEvent<HTMLInputElement>, checked: boolean) {
+        if (selectedSound) {
+            selectedSound.envelopes.filter._24dB = checked;
+        }
+
+        set_24dB(checked);
     }
 
     return (
@@ -121,8 +143,8 @@ export const FilterEnvelopeControl = () => {
                     </Typography>
                     <Slider
                         min={0}
-                        max={1}
-                        step={0.001}
+                        max={30}
+                        step={0.1}
                         value={qFactor}
                         onChange={handleQFactorChange}
                         disabled={!selectedSound}
@@ -141,6 +163,10 @@ export const FilterEnvelopeControl = () => {
                         disabled={!selectedSound}
                     />
                 </Box>
+                <FormControlLabel
+                    control={<Switch checked={_24dB} onChange={handle_24Change} />}
+                    label="24dB"
+                />
             </Stack>
         </Card>
     );

@@ -3,8 +3,12 @@ export class PitchEnvelope {
     end = 0;
     time = 0;
 
-    init(oscillatorNode: OscillatorNode, startTime: number, frequency: number) {
-        oscillatorNode.frequency.setValueAtTime(frequency + this.initial, startTime);
-        oscillatorNode.frequency.linearRampToValueAtTime(frequency + this.end, startTime + this.time);
+    init(oscillators: OscillatorNode[], startTime: number) {
+        oscillators.forEach((oscillatorNode) => {
+            const frequency = oscillatorNode.frequency.value;
+
+            oscillatorNode.frequency.setValueAtTime(frequency + this.initial, startTime);
+            oscillatorNode.frequency.linearRampToValueAtTime(frequency + this.end, startTime + this.time);
+        });
     }
 }
