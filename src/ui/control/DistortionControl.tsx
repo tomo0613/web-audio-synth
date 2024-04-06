@@ -15,7 +15,7 @@ const overSampleTypes: OverSampleType[] = [
 
 function assertOverSampleTypeValue(value?: string): asserts value is OverSampleType {
     if (!overSampleTypes.includes(value as OverSampleType)) {
-        throw new Error(`value: '${value}' is not an OverSampleType`);
+        throw new Error(`value: '${value}' is not an Oversample type`);
     }
 }
 

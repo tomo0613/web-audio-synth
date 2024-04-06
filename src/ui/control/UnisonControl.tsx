@@ -24,6 +24,7 @@ export const UnisonControl = () => {
     const { selectedSound } = useUiContext();
     const [count, setCount] = useState(1);
     const [detune, setDetune] = useState(1);
+    const [blend, setBlend] = useState(0);
     const [mode, setMode] = useState<Unison["mode"]>("linear");
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export const UnisonControl = () => {
 
         setCount(selectedSound.effects.unison.oscillatorCount);
         setDetune(selectedSound.effects.unison.detune);
+        setBlend(selectedSound.effects.unison.blend);
         setMode(selectedSound.effects.unison.mode);
     }, [selectedSound]);
 
@@ -50,6 +52,12 @@ export const UnisonControl = () => {
 
     useEffect(() => {
         if (selectedSound) {
+            selectedSound.effects.unison.blend = blend;
+        }
+    }, [blend]);
+
+    useEffect(() => {
+        if (selectedSound) {
             selectedSound.effects.unison.mode = mode;
         }
     }, [mode]);
@@ -60,6 +68,10 @@ export const UnisonControl = () => {
 
     function handleDetuneChange(e: Event, value: number) {
         setDetune(value);
+    }
+
+    function handleBlendChange(e: Event, value: number) {
+        setBlend(value);
     }
 
     function handleModeSelect(e: React.ChangeEvent<HTMLInputElement>) {
@@ -78,7 +90,7 @@ export const UnisonControl = () => {
             <Stack mt={2} spacing={2}>
                 <Box>
                     <Typography>
-                        Oscillator count [ {count} ]
+                        Voices [ {count} ]
                     </Typography>
                     <Slider
                         min={1}
@@ -102,6 +114,20 @@ export const UnisonControl = () => {
                         onChange={handleDetuneChange}
                         disabled={!selectedSound}
                         sx={{ width: "100%" }}
+                    />
+                </Box>
+                <Box>
+                    <Typography>
+                        Blend [ {blend} ]
+                    </Typography>
+                    <Slider
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={blend}
+                        onChange={handleBlendChange}
+                        disabled={!selectedSound}
+                        sx={{ width: "100px" }}
                     />
                 </Box>
                 <TextField

@@ -24,7 +24,7 @@ export const AmpEnvelopeControl = () => {
         <Card sx={cardSx}>
             <Divider>
                 <Typography>
-                    Amplitude
+                    Amplitude ( ADSR )
                 </Typography>
             </Divider>
             <Stack mt={2} spacing={2}>
