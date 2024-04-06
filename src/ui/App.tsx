@@ -7,6 +7,7 @@ import { testTrack } from "@core/testTrack";
 import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
 import { UiContextProvider } from "./context/UiContextProvider";
 import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
+import { DistortionControl } from "./control/DistortionControl";
 import { EchoControl } from "./control/EchoControl";
 import { FilterEnvelopeControl } from "./control/FilterEnvelopeControl";
 import { FrequencyControl } from "./control/FrequencyControl";
@@ -67,6 +68,9 @@ export const App = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <UnisonControl />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <DistortionControl />
                     </Grid>
                 </Grid>
             </UiContextProvider>

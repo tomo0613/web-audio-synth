@@ -93,7 +93,7 @@ export const SoundTrackBackPlate: React.FC<SoundTrackBackPlateProps> = ({ rowInd
 
     return (
         <Box sx={soundTrackBackPlateSx}>
-            {Array.from({ length: trackSegmentCount }).map((_, i) => (
+            {Array.from({ length: trackSegmentCount + 16 }).map((_, i) => (
                 <Segment key={`segment-${rowIndex}/${i}`} rowIndex={rowIndex} columnIndex={i} />
             ))}
         </Box>

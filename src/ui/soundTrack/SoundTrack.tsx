@@ -6,7 +6,6 @@ import { SoundTrackBackPlate } from "./SoundTrackBackPlate";
 import { trackHeight } from "./style";
 
 const soundTrackSx: SxProps = {
-    py: 1,
     height: trackHeight,
     position: "relative",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
