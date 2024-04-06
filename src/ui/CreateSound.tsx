@@ -1,5 +1,5 @@
 import { Add, DeleteForever } from "@mui/icons-material";
-import { Box, Divider, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
 
 import { soundPresets } from "@ui/context/soundPresets";
 import { useUiContext } from "@ui/context/UiContext";
@@ -36,6 +36,8 @@ export const CreateSound = () => {
         selectedSoundPreset,
         setSelectedSoundPreset,
         createSound,
+        importTracks,
+        exportTracks,
     } = useUiContext();
 
     function handleSelect(e: React.ChangeEvent<HTMLInputElement>) {
@@ -82,6 +84,12 @@ export const CreateSound = () => {
                     <DeleteForever />
                 </IconButton>
             </ButtonTooltip>
+            <Button onClick={importTracks}>
+                Import
+            </Button>
+            <Button onClick={exportTracks}>
+                Export
+            </Button>
         </Box>
     );
 };

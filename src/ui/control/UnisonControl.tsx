@@ -32,7 +32,7 @@ export const UnisonControl = () => {
             return;
         }
 
-        setCount(selectedSound.effects.unison.oscillatorCount);
+        setCount(selectedSound.effects.unison.voices);
         setDetune(selectedSound.effects.unison.detune);
         setBlend(selectedSound.effects.unison.blend);
         setMode(selectedSound.effects.unison.mode);
@@ -40,7 +40,7 @@ export const UnisonControl = () => {
 
     useEffect(() => {
         if (selectedSound) {
-            selectedSound.effects.unison.oscillatorCount = count;
+            selectedSound.effects.unison.voices = count;
         }
     }, [count]);
 

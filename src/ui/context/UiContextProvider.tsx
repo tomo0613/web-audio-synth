@@ -38,6 +38,24 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         });
     }, [selectedSound]);
 
+    function importTracks() {
+        console.log("ToDo");
+    }
+
+    function exportTracks() {
+        const result = context.scheduler.tracks.reduce<Partial<Sound>[]>((res, track) => {
+            if (track.sounds.size) {
+                const sounds = Array.from(track.sounds).map(([, sound]) => sound);
+
+                res.push(sounds);
+            }
+
+            return res;
+        }, []);
+
+        console.info(JSON.stringify(result, undefined, 4));
+    }
+
     const deleteSelectedSound = useCallback(() => {
         if (!selectedSound) {
             return;
@@ -98,6 +116,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         selectedSoundPreset,
         setSelectedSoundPreset,
         createSound,
+        importTracks,
+        exportTracks,
         frequency,
         setFrequency,
         waveForm,

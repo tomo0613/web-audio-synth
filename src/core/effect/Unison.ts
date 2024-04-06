@@ -4,23 +4,23 @@ export class Unison {
     detune = 1;
     blend = 0;
     mode: "linear" | "exponential" | "parabolic" = "linear";
-    private _oscillatorCount = 1;
+    private _voices = 1;
 
-    get oscillatorCount() {
-        return this._oscillatorCount;
+    get voices() {
+        return this._voices;
     }
 
-    set oscillatorCount(value) {
+    set voices(value) {
         if (value < 1 || !Number.isInteger(value)) {
-            throw new Error(`count: [${value}] is invalid`);
+            throw new Error(`voices: [${value}] is not valid`);
         }
 
-        this._oscillatorCount = value;
+        this._voices = value;
     }
 
     init(output: AudioNode, oscillators: OscillatorNode[], frequency: number) {
         let blendGainNode: GainNode | null = null;
-        const edge = this.oscillatorCount / 2 - 0.5;
+        const edge = this.voices / 2 - 0.5;
 
         if (this.blend > 0) {
             blendGainNode = context.instance.createGain();

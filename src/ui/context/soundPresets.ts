@@ -16,6 +16,24 @@ export const soundPresets = {
             },
         },
     },
+    "kick_1": {
+        frequency: 40,
+        length: 1 / 8,
+        envelopes: {
+            amp: {
+                attack: 0.001,
+                release: 0.45,
+            },
+            pitch: {
+                initial: 80,
+                time: 0.144,
+            },
+            reverb: {
+                time: 1,
+                decay: 1,
+            },
+        },
+    },
     "snare_0": {
         frequency: 155.56,
         length: 1 / 16,
@@ -30,6 +48,27 @@ export const soundPresets = {
                 initial: 110,
                 end: -110,
                 time: 0.65,
+            },
+        },
+    },
+    "snare_1": {
+        frequency: 40,
+        length: 1 / 8,
+        noise: 0.1,
+        envelopes: {
+            amp: {
+                attack: 0.005,
+                decay: 0.055,
+                sustain: 0,
+            },
+            pitch: {
+                initial: 110,
+                end: 0,
+                time: 0.192,
+            },
+            reverb: {
+                time: 0.45,
+                decay: 0.74,
             },
         },
     },
