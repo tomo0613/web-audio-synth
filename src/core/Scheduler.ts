@@ -121,7 +121,7 @@ export class Scheduler {
             return Math.max(result, trackEndPosition);
         }, 0);
 
-        const lastStep = this.currentPosition > endPosition;
+        const lastStep = this.currentPosition >= endPosition;
 
         if (lastStep) {
             if (this.loop) {

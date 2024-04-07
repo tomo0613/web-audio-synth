@@ -28,7 +28,7 @@ export class SoundTrack {
     }
 
     private updateLastPosition() {
-        const positions = Array.from(this.sounds.keys()).sort();
+        const positions = Array.from(this.sounds.keys()).sort((a, b) => a - b);
 
         this.lastPosition = positions[positions.length - 1];
     }

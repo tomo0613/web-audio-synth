@@ -111,6 +111,41 @@ export const soundPresets = {
             },
         },
     },
+    "pad_0": {
+        waveForm: "sawtooth",
+        frequency: 293.66,
+        length: 1,
+        noise: 0.06,
+        envelopes: {
+            amp: {
+                attack: 0.07,
+                decay: 0.07,
+                sustain: 0.77,
+                release: 0.2,
+            },
+            filter: {
+                type: "lowpass",
+                frequency: 2000,
+                q: 7.5,
+                detune: 655,
+                _24dB: true,
+            },
+        },
+        effects: {
+            reverb: {
+                time: 3,
+                decay: 1,
+            },
+            unison: {
+                voices: 3,
+                detune: 0.8,
+                mode: "exponential",
+            },
+            distortion: {
+                amount: 50,
+            },
+        },
+    },
 };
 
 const propertyKeyMap = [
@@ -132,6 +167,7 @@ const propertyKeyMap = [
     "envelopes.filter.frequency",
     "envelopes.filter.q",
     "envelopes.filter.detune",
+    "envelopes.filter._24dB",
 
     "effects.reverb.time",
     "effects.reverb.decay",
@@ -139,6 +175,14 @@ const propertyKeyMap = [
 
     "effects.delay.time",
     "effects.delay.feedback",
+
+    "effects.unison.voices",
+    "effects.unison.detune",
+    "effects.unison.blend",
+    "effects.unison.mode",
+
+    "effects.distortion.amount",
+    "effects.distortion.overSample",
 ];
 
 function findProperty<O extends object>(source: O, propertyKey: string) {

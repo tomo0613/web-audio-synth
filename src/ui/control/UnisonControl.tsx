@@ -108,8 +108,8 @@ export const UnisonControl = () => {
                     </Typography>
                     <Slider
                         min={0}
-                        max={100}
-                        step={0.01}
+                        max={20}
+                        step={0.001}
                         value={detune}
                         onChange={handleDetuneChange}
                         disabled={!selectedSound}

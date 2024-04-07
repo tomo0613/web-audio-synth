@@ -45,7 +45,11 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     function exportTracks() {
         const result = context.scheduler.tracks.reduce<Partial<Sound>[]>((res, track) => {
             if (track.sounds.size) {
-                const sounds = Array.from(track.sounds).map(([, sound]) => sound);
+                const sounds = Array.from(track.sounds).reduce((t, [position, sound]) => {
+                    t[position] = sound;
+
+                    return t;
+                }, {});
 
                 res.push(sounds);
             }
