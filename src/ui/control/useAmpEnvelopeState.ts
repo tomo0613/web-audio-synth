@@ -1,23 +1,24 @@
 import { useReducer } from "react";
 
-import type { PitchEnvelope } from "@core/envelope/PitchEnvelope";
+import type { AmpEnvelope } from "@core/envelope/AmpEnvelope";
 
 export enum ActionType {
     initializeForm = "initializeForm",
     setForm = "setForm",
 }
 
-export const pitchEnvelopeDefaultState = {
-    initial: 0,
-    end: 0,
-    time: 0,
+const defaultState = {
+    attack: 0,
+    decay: 0,
+    sustain: 0,
+    release: 0,
 };
 
-type State = typeof pitchEnvelopeDefaultState;
+type State = typeof defaultState;
 
 interface InitializeStateAction {
     type: ActionType.initializeForm;
-    payload?: PitchEnvelope;
+    payload?: AmpEnvelope;
 }
 
 interface SetStateAction {
@@ -25,18 +26,19 @@ interface SetStateAction {
     payload: Partial<State>;
 }
 
-export type Action =
+type Action =
     | InitializeStateAction
     | SetStateAction;
 
-export function usePitchEnvelopeState(): [State, React.Dispatch<Action>] {
+export function useAmpEnvelopeState(): [State, React.Dispatch<Action>] {
     return useReducer((state: State, action: Action) => {
         switch (action.type) {
             case ActionType.initializeForm:
                 return {
-                    initial: action.payload?.initial || pitchEnvelopeDefaultState.initial,
-                    end: action.payload?.end || pitchEnvelopeDefaultState.end,
-                    time: action.payload?.time || pitchEnvelopeDefaultState.time,
+                    attack: action.payload?.attack || defaultState.attack,
+                    decay: action.payload?.decay || defaultState.decay,
+                    sustain: action.payload?.sustain || defaultState.sustain,
+                    release: action.payload?.release || defaultState.release,
                 };
             case ActionType.setForm:
                 return {
@@ -46,5 +48,5 @@ export function usePitchEnvelopeState(): [State, React.Dispatch<Action>] {
             default:
                 throw new Error();
         }
-    }, pitchEnvelopeDefaultState);
+    }, defaultState);
 }

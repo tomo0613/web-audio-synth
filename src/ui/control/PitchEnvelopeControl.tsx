@@ -1,14 +1,27 @@
 import { Box, Card, Divider, Slider, Stack, SxProps, TextField, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 import { useUiContext } from "@ui/context/UiContext";
-import { ActionType } from "@ui/context/usePitchEnvelopeState";
+import { ActionType, usePitchEnvelopeState } from "./usePitchEnvelopeState";
 
 const cardSx: SxProps = {
     p: 4,
 };
 
 export const PitchEnvelopeControl = () => {
-    const { selectedSound, pitchEnvelopeState, pitchEnvelopeDispatch } = useUiContext();
+    const { selectedSound } = useUiContext();
+    const [state, dispatch] = usePitchEnvelopeState();
+
+    useEffect(() => {
+        if (!selectedSound) {
+            return;
+        }
+
+        dispatch({
+            type: ActionType.initializeForm,
+            payload: selectedSound.envelopes.pitch,
+        });
+    }, [selectedSound]);
 
     function handleSliderChange(e: Event, value: number) {
         const key = (e.target as HTMLInputElement).name;
@@ -17,7 +30,7 @@ export const PitchEnvelopeControl = () => {
             selectedSound.envelopes.pitch[key] = value;
         }
 
-        pitchEnvelopeDispatch({ type: ActionType.setForm, payload: { [key]: value } });
+        dispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }
 
     function handleTextFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -30,7 +43,7 @@ export const PitchEnvelopeControl = () => {
             selectedSound.envelopes.pitch[key] = value;
         }
 
-        pitchEnvelopeDispatch({ type: ActionType.setForm, payload: { [key]: value } });
+        dispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }
 
     return (
@@ -45,7 +58,7 @@ export const PitchEnvelopeControl = () => {
                     type="number"
                     label="Initial"
                     name="initial"
-                    value={pitchEnvelopeState.initial}
+                    value={state.initial}
                     onChange={handleTextFieldChange}
                     disabled={!selectedSound}
                 />
@@ -53,19 +66,19 @@ export const PitchEnvelopeControl = () => {
                     type="number"
                     label="End"
                     name="end"
-                    value={pitchEnvelopeState.end}
+                    value={state.end}
                     onChange={handleTextFieldChange}
                     disabled={!selectedSound}
                 />
                 <Box>
                     <Typography>
-                        Time [ {pitchEnvelopeState.time} ]
+                        Time [ {state.time} ]
                     </Typography>
                     <Slider
                         min={0}
                         max={1}
                         step={0.001}
-                        value={pitchEnvelopeState.time}
+                        value={state.time}
                         name="time"
                         onChange={handleSliderChange}
                         disabled={!selectedSound}

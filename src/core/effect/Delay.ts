@@ -18,6 +18,7 @@ export class Delay {
         delayNode.connect(gainNode);
         gainNode.connect(delayNode);
         input.connect(delayNode);
-        delayNode.connect(context.gainNode);
+
+        return delayNode;
     }
 }

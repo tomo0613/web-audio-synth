@@ -2,8 +2,8 @@ import { context } from "@core/context";
 
 export class FilterEnvelope {
     type: BiquadFilterType | undefined;
-    frequency = 0;
-    q = 0;
+    frequency = 350;
+    q = 1;
     detune = 0;
     _24dB = false;
 

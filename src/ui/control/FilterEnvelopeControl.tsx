@@ -106,7 +106,7 @@ export const FilterEnvelopeControl = () => {
                     Filter
                 </Typography>
             </Divider>
-            <Stack mt={2} spacing={2}>
+            <Stack mt={4} spacing={2}>
                 <TextField
                     select
                     label="Type"
@@ -129,7 +129,7 @@ export const FilterEnvelopeControl = () => {
                         Frequency [ {frequency} ]
                     </Typography>
                     <Slider
-                        min={0}
+                        min={10}
                         max={context.instance.sampleRate / 2}
                         step={1}
                         value={frequency}
@@ -142,9 +142,9 @@ export const FilterEnvelopeControl = () => {
                         Q [ {qFactor} ]
                     </Typography>
                     <Slider
-                        min={0}
-                        max={30}
-                        step={0.1}
+                        min={0.0001}
+                        max={1000}
+                        step={0.0001}
                         value={qFactor}
                         onChange={handleQFactorChange}
                         disabled={!selectedSound}

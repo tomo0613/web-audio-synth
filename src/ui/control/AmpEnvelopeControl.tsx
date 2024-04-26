@@ -1,14 +1,27 @@
 import { Box, Card, Divider, Slider, Stack, SxProps, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 import { useUiContext } from "@ui/context/UiContext";
-import { ActionType } from "@ui/context/useAmpEnvelopeState";
+import { ActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
 
 const cardSx: SxProps = {
     p: 4,
 };
 
 export const AmpEnvelopeControl = () => {
-    const { selectedSound, ampEnvelopeState, ampEnvelopeDispatch } = useUiContext();
+    const { selectedSound } = useUiContext();
+    const [state, dispatch] = useAmpEnvelopeState();
+
+    useEffect(() => {
+        if (!selectedSound) {
+            return;
+        }
+
+        dispatch({
+            type: ActionType.initializeForm,
+            payload: selectedSound.envelopes.amp,
+        });
+    }, [selectedSound]);
 
     function handleChange(e: Event, value: number) {
         const key = (e.target as HTMLInputElement).name;
@@ -17,7 +30,7 @@ export const AmpEnvelopeControl = () => {
             selectedSound.envelopes.amp[key] = value;
         }
 
-        ampEnvelopeDispatch({ type: ActionType.setForm, payload: { [key]: value } });
+        dispatch({ type: ActionType.setForm, payload: { [key]: value } });
     }
 
     return (
@@ -28,7 +41,7 @@ export const AmpEnvelopeControl = () => {
                 </Typography>
             </Divider>
             <Stack mt={2} spacing={2}>
-                {Object.entries(ampEnvelopeState).map(([key, value]) => (
+                {Object.entries(state).map(([key, value]) => (
                     <Box key={key}>
                         <Typography>
                             {key} [ {value} ]

@@ -35,7 +35,8 @@ export class Distortion {
         waveShaperNode.oversample = this.overSample;
 
         input.connect(waveShaperNode);
-        waveShaperNode.connect(context.gainNode);
+
+        return waveShaperNode;
     }
 
     private createCurve() {

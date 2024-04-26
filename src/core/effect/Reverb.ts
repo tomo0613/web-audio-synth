@@ -30,8 +30,10 @@ export class Reverb {
         const convolverNode = context.instance.createConvolver();
 
         convolverNode.buffer = this.createBuffer();
-        convolverNode.connect(context.gainNode);
+
         input.connect(convolverNode);
+
+        return convolverNode;
     }
 
     private createBuffer() {

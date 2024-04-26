@@ -1,4 +1,5 @@
 import { context } from "./context";
+import { Compressor } from "./effect/Compressor";
 import { Delay } from "./effect/Delay";
 import { Distortion } from "./effect/Distortion";
 import { Reverb } from "./effect/Reverb";
@@ -30,6 +31,7 @@ export class Sound {
         distortion: new Distortion(),
         reverb: new Reverb(),
         unison: new Unison(),
+        compressor: new Compressor(),
     };
 
     length: number;
@@ -68,9 +70,10 @@ export class Sound {
         this.envelopes.pitch.init(this.oscillators, startTime);
         this.envelopes.filter.init(ampEnvelopeGain);
 
-        this.effects.distortion.init(ampEnvelopeGain);
-        this.effects.delay.init(ampEnvelopeGain);
-        this.effects.reverb.init(ampEnvelopeGain);
+        this.effects.distortion.init(ampEnvelopeGain)?.connect(context.gainNode);
+        this.effects.delay.init(ampEnvelopeGain)?.connect(context.gainNode);
+        this.effects.reverb.init(ampEnvelopeGain)?.connect(context.gainNode);
+        this.effects.compressor.init(ampEnvelopeGain)?.connect(context.gainNode);
 
         this.init();
 

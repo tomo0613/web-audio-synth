@@ -6,8 +6,6 @@ import { useKeyPressListener } from "@ui/context/useKeyPressListener";
 import changeListener from "./changeListener";
 import { setSoundProperties } from "./soundPresets";
 import { defaultContextValue, UiContext } from "./UiContext";
-import { ActionType as SetAmpEnvelopeStateActionType, useAmpEnvelopeState } from "./useAmpEnvelopeState";
-import { ActionType as SetPitchEnvelopeStateActionType, usePitchEnvelopeState } from "./usePitchEnvelopeState";
 import { useProgress } from "./useProgress";
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -16,8 +14,6 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
     const [selectedSoundPreset, setSelectedSoundPreset] = useState(defaultContextValue.selectedSoundPreset);
     const [frequency, setFrequency] = useState(defaultContextValue.frequency);
     const [waveForm, setWaveForm] = useState(defaultContextValue.waveForm);
-    const [ampEnvelopeState, ampEnvelopeDispatch] = useAmpEnvelopeState();
-    const [pitchEnvelopeState, pitchEnvelopeDispatch] = usePitchEnvelopeState();
     const [trackSegmentCount, setTrackSegmentCount] = useState(getInitialSegmentCount());
     const progress = useProgress(defaultContextValue.progress);
 
@@ -28,14 +24,6 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
 
         setFrequency(selectedSound.frequency);
         setWaveForm(selectedSound.waveForm);
-        ampEnvelopeDispatch({
-            type: SetAmpEnvelopeStateActionType.initializeForm,
-            payload: selectedSound.envelopes.amp,
-        });
-        pitchEnvelopeDispatch({
-            type: SetPitchEnvelopeStateActionType.initializeForm,
-            payload: selectedSound.envelopes.pitch,
-        });
     }, [selectedSound]);
 
     function importTracks() {
@@ -126,10 +114,6 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         setFrequency,
         waveForm,
         setWaveForm,
-        ampEnvelopeState,
-        ampEnvelopeDispatch,
-        pitchEnvelopeState,
-        pitchEnvelopeDispatch,
         trackSegmentCount,
         setTrackSegmentCount,
         progress,
