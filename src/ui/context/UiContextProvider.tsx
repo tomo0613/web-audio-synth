@@ -45,7 +45,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
             return res;
         }, []);
 
-        console.info(JSON.stringify(result, undefined, 4));
+        return JSON.stringify(result, undefined, 4);
     }
 
     const deleteSelectedSound = useCallback(() => {
@@ -56,7 +56,7 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         let position: number | undefined = undefined;
 
         const selectedTrack = context.scheduler.tracks.find((track) => {
-            position = getMapKeyByValue<number, Sound>(track.sounds, selectedSound);
+            position = getMapKeyByValue(track.sounds, selectedSound);
 
             return position !== undefined;
         });
@@ -127,10 +127,13 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
 };
 
 function getInitialSegmentCount() {
-    return context.scheduler.tracks.reduce((n, track) => Math.max(n, track.lastPosition || 0), 0);
+    return context.scheduler.tracks.reduce((n, track) => Math.max(n, track.endPosition || 0), 0);
 }
 
-function getMapKeyByValue<K, V, M extends Map<K, V> = Map<K, V>>(map: M, item: V): K | undefined {
+type KeyOfMap<M extends Map<unknown, unknown>> = M extends Map<infer K, unknown> ? K : never;
+type ValueOfMap<M extends Map<unknown, unknown>> = M extends Map<unknown, infer V> ? V : never;
+
+function getMapKeyByValue<M extends Map<any, unknown>>(map: M, item: ValueOfMap<M>): KeyOfMap<M> | undefined {
     for (let [key, value] of map.entries()) {
         if (value === item) {
             return key;

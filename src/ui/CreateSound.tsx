@@ -1,8 +1,10 @@
 import { Add, DeleteForever } from "@mui/icons-material";
 import { Box, Button, Divider, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
+import { useState } from "react";
 
 import { soundPresets } from "@ui/context/soundPresets";
 import { useUiContext } from "@ui/context/UiContext";
+import { ImportExportDialog } from "./ImportExportDialog";
 
 const ButtonTooltipContent = ({ text, hotKey }: { text: string; hotKey: string }) => (
     <>
@@ -36,9 +38,16 @@ export const CreateSound = () => {
         selectedSoundPreset,
         setSelectedSoundPreset,
         createSound,
-        importTracks,
-        exportTracks,
     } = useUiContext();
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+    function openDialog() {
+        setDialogOpen(true);
+    }
+
+    function closeDialog() {
+        setDialogOpen(false);
+    }
 
     function handleSelect(e: React.ChangeEvent<HTMLInputElement>) {
         setSelectedSoundPreset(e.target.value);
@@ -84,12 +93,10 @@ export const CreateSound = () => {
                     <DeleteForever />
                 </IconButton>
             </ButtonTooltip>
-            <Button onClick={importTracks}>
-                Import
+            <Button onClick={openDialog}>
+                Import / Export
             </Button>
-            <Button onClick={exportTracks}>
-                Export
-            </Button>
+            <ImportExportDialog open={dialogOpen} onClose={closeDialog} />
         </Box>
     );
 };

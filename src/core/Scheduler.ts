@@ -110,16 +110,7 @@ export class Scheduler {
         this.currentPosition++;
         this.nextSoundStartTime += this.timeStep;
 
-        const endPosition = this._tracks.reduce((result, track) => {
-            if (track.lastPosition === undefined) {
-                return result;
-            }
-
-            const lastSound = track.sounds.get(track.lastPosition)!;
-            const trackEndPosition = track.lastPosition + lastSound.length * 16;
-
-            return Math.max(result, trackEndPosition);
-        }, 0);
+        const endPosition = this._tracks.reduce((result, track) => Math.max(result, track.endPosition), 0);
 
         const lastStep = this.currentPosition >= endPosition;
 

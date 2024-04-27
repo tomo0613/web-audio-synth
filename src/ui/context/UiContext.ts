@@ -13,7 +13,7 @@ export const defaultContextValue = {
     setSelectedSoundPreset: noop as React.Dispatch<React.SetStateAction<string>>,
     createSound: noop,
     importTracks: noop,
-    exportTracks: noop,
+    exportTracks: noop as () => string,
     frequency: 440,
     setFrequency: noop as React.Dispatch<React.SetStateAction<number>>,
     waveForm: "sine" as OscillatorType,

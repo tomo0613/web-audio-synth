@@ -19,3 +19,9 @@ export function useKeyPressListener(keyListeners: KeyListeners) {
         };
     }, [onKeyUp]);
 }
+
+window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault();
+    }
+});

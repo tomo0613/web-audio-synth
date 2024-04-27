@@ -8,28 +8,34 @@ export class SoundTrack {
     sounds: Map<number, Sound>;
 
     lastPosition: number | undefined;
+    endPosition = 0;
 
     constructor(sounds: [number, Sound][]) {
         this.sounds = new Map(sounds);
 
-        this.updateLastPosition();
+        this.update();
     }
 
     add(sound: Sound, position: number) {
         this.sounds.set(position, sound);
 
-        this.updateLastPosition();
+        this.update();
     }
 
     remove(position: number) {
         this.sounds.delete(position);
 
-        this.updateLastPosition();
+        this.update();
     }
 
-    private updateLastPosition() {
+    private update() {
         const positions = Array.from(this.sounds.keys()).sort((a, b) => a - b);
 
-        this.lastPosition = positions[positions.length - 1];
+        const lastPosition = positions[positions.length - 1];
+
+        this.lastPosition = lastPosition;
+        this.endPosition = lastPosition !== undefined
+            ? lastPosition + this.sounds.get(lastPosition)!.length * 16
+            : 0;
     }
 }
