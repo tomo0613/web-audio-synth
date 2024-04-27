@@ -217,7 +217,7 @@ function setSoundPropertiesBy(target: Sound, source: Partial<Sound>) {
     });
 }
 
-export function setSoundProperties(sound: Sound, selectedSoundPreset: string, selectedSound: Sound | null) {
+export function setSoundProperties(sound: Sound, selectedSoundPreset: string, selectedSound: Partial<Sound> | null) {
     if (selectedSoundPreset === "selected" && selectedSound) {
         setSoundPropertiesBy(sound, selectedSound);
 

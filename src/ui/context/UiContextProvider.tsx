@@ -2,11 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { context } from "@core/context";
 import { Sound } from "@core/Sound";
+import { SoundTrack } from "@core/SoundTrack";
 import { useKeyPressListener } from "@ui/context/useKeyPressListener";
 import changeListener from "./changeListener";
 import { setSoundProperties } from "./soundPresets";
 import { defaultContextValue, UiContext } from "./UiContext";
 import { useProgress } from "./useProgress";
+
+type DataFormat = Record<string, Partial<Sound>>[];
 
 export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [selectedSound, setSelectedSound] = useState(defaultContextValue.selectedSound);
@@ -26,12 +29,40 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         setWaveForm(selectedSound.waveForm);
     }, [selectedSound]);
 
-    function importTracks() {
-        console.log("ToDo");
+    function importTracks(jsonString: string) {
+        setSelectedSound(null);
+
+        try {
+            const jsonObject: DataFormat = JSON.parse(jsonString);
+
+            console.log(jsonObject);
+
+            const tracks: SoundTrack[] = [];
+
+            jsonObject.forEach((trackData) => {
+                const track = new SoundTrack();
+
+                Object.entries(trackData).forEach(([key, soundData]) => {
+                    const sound = new Sound();
+
+                    setSoundProperties(sound, "selected", soundData);
+
+                    track.add(sound, Number(key));
+                });
+
+                tracks.push(track);
+            });
+
+            context.scheduler.tracks = tracks;
+        } catch (error) {
+            console.error(error);
+        }
+
+        changeListener.dispatch("change");
     }
 
     function exportTracks() {
-        const result = context.scheduler.tracks.reduce<Partial<Sound>[]>((res, track) => {
+        const result = context.scheduler.tracks.reduce<DataFormat>((res, track) => {
             if (track.sounds.size) {
                 const sounds = Array.from(track.sounds).reduce((t, [position, sound]) => {
                     t[position] = sound;

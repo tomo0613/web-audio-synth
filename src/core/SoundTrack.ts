@@ -10,7 +10,7 @@ export class SoundTrack {
     lastPosition: number | undefined;
     endPosition = 0;
 
-    constructor(sounds: [number, Sound][]) {
+    constructor(sounds?: [number, Sound][]) {
         this.sounds = new Map(sounds);
 
         this.update();

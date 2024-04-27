@@ -12,7 +12,7 @@ export const defaultContextValue = {
     selectedSoundPreset: "default",
     setSelectedSoundPreset: noop as React.Dispatch<React.SetStateAction<string>>,
     createSound: noop,
-    importTracks: noop,
+    importTracks: noop as (data: string) => void,
     exportTracks: noop as () => string,
     frequency: 440,
     setFrequency: noop as React.Dispatch<React.SetStateAction<number>>,

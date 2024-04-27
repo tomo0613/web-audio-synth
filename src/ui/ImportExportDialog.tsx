@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, type SxProps, TextField } from "@mui/material";
 
 import { useUiContext } from "@ui/context/UiContext";
+import { useRef } from "react";
 
 const textAreaSx: SxProps = {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
@@ -19,8 +20,15 @@ export const ImportExportDialog: React.FC<ImportExportDialogProps> = ({ open, on
         importTracks,
         exportTracks,
     } = useUiContext();
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     const content = exportTracks();
+
+    function handleImport() {
+        importTracks(textAreaRef?.current?.value || "");
+
+        onClose();
+    }
 
     function toClipboard() {
         void navigator.clipboard.writeText(content);
@@ -40,6 +48,7 @@ export const ImportExportDialog: React.FC<ImportExportDialogProps> = ({ open, on
                     minRows={10}
                     spellCheck={false}
                     sx={textAreaSx}
+                    inputRef={textAreaRef}
                     defaultValue={content}
                 />
             </DialogContent>
@@ -47,7 +56,7 @@ export const ImportExportDialog: React.FC<ImportExportDialogProps> = ({ open, on
                 <Button onClick={onClose}>
                     Cancel
                 </Button>
-                <Button onClick={onClose}>
+                <Button onClick={handleImport}>
                     Import
                 </Button>
             </DialogActions>
