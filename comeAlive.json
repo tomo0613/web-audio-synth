@@ -1,0 +1,191 @@
+[
+    {
+        "0": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 220,
+            "waveForm": "sine"
+        },
+        "22": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.0625,
+            "frequency": 392,
+            "waveForm": "sine"
+        },
+        "23": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.0625,
+            "frequency": 440,
+            "waveForm": "sine"
+        },
+        "24": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 493.88,
+            "waveForm": "sine"
+        },
+        "28": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 392,
+            "waveForm": "sine"
+        },
+        "32": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 293.66,
+            "waveForm": "sine"
+        },
+        "44": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 220,
+            "waveForm": "sine"
+        },
+        "60": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 293.66,
+            "waveForm": "sine"
+        }
+    },
+    {
+        "0": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 261.63,
+            "waveForm": "sine"
+        },
+        "32": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 246.94,
+            "waveForm": "sine"
+        },
+        "44": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 261.63,
+            "waveForm": "sine"
+        }
+    },
+    {
+        "0": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 329.63,
+            "waveForm": "sine"
+        },
+        "32": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.5,
+            "frequency": 196,
+            "waveForm": "sine"
+        },
+        "44": {
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.05,
+                    "sustain": 0.3,
+                    "release": 0.3
+                }
+            },
+            "length": 0.25,
+            "frequency": 329.63,
+            "waveForm": "sine"
+        }
+    },
+    {}
+]

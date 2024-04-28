@@ -1,3 +1,5 @@
+[Launch](https://tomo0613.github.io/web-audio-synth/)
+
 Resources:
 - Video
   - [I Play JavaScript: Making a Web Audio Synthesizer (Neil McCallion)](https://www.youtube.com/watch?v=uasGsHf7UYA&t=1512s)

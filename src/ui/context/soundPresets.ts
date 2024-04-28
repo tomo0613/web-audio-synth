@@ -4,6 +4,7 @@ export const soundPresets = {
     "kick_0": {
         frequency: 130.81,
         length: 1 / 8,
+        waveForm: "sine",
         envelopes: {
             amp: {
                 attack: 0.03,
@@ -19,6 +20,7 @@ export const soundPresets = {
     "kick_1": {
         frequency: 40,
         length: 1 / 8,
+        waveForm: "sine",
         envelopes: {
             amp: {
                 attack: 0.001,
@@ -31,6 +33,48 @@ export const soundPresets = {
             reverb: {
                 time: 1,
                 decay: 1,
+            },
+        },
+    },
+    "kick_2": {
+        length: 1 / 8,
+        frequency: 50,
+        waveForm: "sine",
+        envelopes: {
+            amp: {
+                attack: 0,
+                decay: 0.05,
+                sustain: 0.12,
+                release: 0.25,
+            },
+            pitch: {
+                initial: 200,
+                end: 0,
+                time: 0.01,
+            },
+        },
+        effects: {
+            distortion: {
+                amount: 13,
+                overSample: "4x",
+            },
+        },
+    },
+    "bass_0": {
+        length: 1 / 4,
+        frequency: 50,
+        waveForm: "sine",
+        envelopes: {
+            amp: {
+                attack: 0,
+                decay: 0.005,
+                sustain: 0.7,
+                release: 1,
+            },
+            pitch: {
+                initial: 200,
+                end: 0,
+                time: 0.01,
             },
         },
     },

@@ -2,8 +2,6 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { context } from "@core/context";
-import { testTrack } from "@core/testTrack";
 import { AudioAnalyserDisplay } from "./AudioAnalyserDisplay";
 import { UiContextProvider } from "./context/UiContextProvider";
 import { AmpEnvelopeControl } from "./control/AmpEnvelopeControl";
@@ -23,9 +21,6 @@ import { WaveFormControl } from "./control/WaveFormControl";
 import { CreateSound } from "./CreateSound";
 import { SoundTrackList } from "./soundTrack/SoundTrackList";
 import { theme } from "./theme";
-
-// test
-context.scheduler.tracks = testTrack.slice(0, 4);
 
 export const App = () => {
     return (

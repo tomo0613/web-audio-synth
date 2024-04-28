@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, type SxProps, TextField } from "@mui/material";
+import { useEffect, useRef } from "react";
 
 import { useUiContext } from "@ui/context/UiContext";
-import { useRef } from "react";
 
 const textAreaSx: SxProps = {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
@@ -21,6 +21,12 @@ export const ImportExportDialog: React.FC<ImportExportDialogProps> = ({ open, on
         exportTracks,
     } = useUiContext();
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        import("../../comeAlive.json").then((res) => {
+            importTracks(JSON.stringify(res.default));
+        });
+    }, []);
 
     const content = exportTracks();
 

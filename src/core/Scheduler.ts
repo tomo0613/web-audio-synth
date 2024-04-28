@@ -21,7 +21,7 @@ export class Scheduler {
     listener = new EventListener<"start" | "stop">();
     private active = false;
     private audioContext: AudioContext;
-    private _tracks: SoundTrack[];
+    private _tracks: SoundTrack[] = [];
     private currentPosition = 0;
     private startTime = 0;
     private nextSoundStartTime = 0;

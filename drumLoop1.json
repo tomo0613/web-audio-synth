@@ -1,0 +1,712 @@
+[
+    {
+        "0": {
+            "id": "Sound_38",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "2": {
+            "id": "Sound_39",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "4": {
+            "id": "Sound_40",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "6": {
+            "id": "Sound_41",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "8": {
+            "id": "Sound_42",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "10": {
+            "id": "Sound_43",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "12": {
+            "id": "Sound_44",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        },
+        "14": {
+            "id": "Sound_45",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0.05,
+                    "sustain": 0,
+                    "release": 0.2
+                },
+                "pitch": {
+                    "initial": 0,
+                    "end": 0,
+                    "time": 0
+                },
+                "filter": {
+                    "type": "highpass",
+                    "frequency": 5000,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 0,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 1
+        }
+    },
+    {
+        "4": {
+            "id": "Sound_46",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.055,
+                    "sustain": 0,
+                    "release": 0
+                },
+                "pitch": {
+                    "initial": 110,
+                    "end": 0,
+                    "time": 0.192
+                },
+                "filter": {
+                    "frequency": 0,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 40,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 0.1
+        },
+        "12": {
+            "id": "Sound_47",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.005,
+                    "decay": 0.055,
+                    "sustain": 0,
+                    "release": 0
+                },
+                "pitch": {
+                    "initial": 110,
+                    "end": 0,
+                    "time": 0.192
+                },
+                "filter": {
+                    "frequency": 0,
+                    "q": 0,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 40,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": {},
+            "noise": 0.1
+        }
+    },
+    {
+        "0": {
+            "id": "Sound_53",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0,
+                    "sustain": 1,
+                    "release": 0.45
+                },
+                "pitch": {
+                    "initial": 80,
+                    "end": 0,
+                    "time": 0.144
+                },
+                "filter": {
+                    "frequency": 350,
+                    "q": 1,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 40,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": null,
+            "noise": 0
+        },
+        "6": {
+            "id": "Sound_52",
+            "envelopes": {
+                "amp": {
+                    "attack": 0.001,
+                    "decay": 0,
+                    "sustain": 1,
+                    "release": 0.45
+                },
+                "pitch": {
+                    "initial": 80,
+                    "end": 0,
+                    "time": 0.144
+                },
+                "filter": {
+                    "frequency": 350,
+                    "q": 1,
+                    "detune": 0,
+                    "_24dB": false
+                }
+            },
+            "effects": {
+                "delay": {
+                    "time": 0,
+                    "feedback": 0
+                },
+                "distortion": {
+                    "amount": 0,
+                    "overSample": "4x"
+                },
+                "reverb": {
+                    "time": 0,
+                    "decay": 0,
+                    "reverse": false
+                },
+                "unison": {
+                    "detune": 1,
+                    "blend": 0,
+                    "mode": "linear",
+                    "_voices": 1
+                },
+                "compressor": {
+                    "disabled": true,
+                    "threshold": -24,
+                    "knee": 30,
+                    "ratio": 12,
+                    "attack": 0.003,
+                    "release": 0.25
+                }
+            },
+            "length": 0.125,
+            "frequency": 40,
+            "waveForm": "sine",
+            "periodicWaveId": "organ",
+            "oscillators": [],
+            "noiseSource": null,
+            "noise": 0
+        }
+    }
+]
