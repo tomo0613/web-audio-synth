@@ -213,6 +213,13 @@ const propertyKeyMap = [
     "envelopes.filter.detune",
     "envelopes.filter._24dB",
 
+    "effects.compressor.disabled",
+    "effects.compressor.threshold",
+    "effects.compressor.knee",
+    "effects.compressor.ratio",
+    "effects.compressor.attack",
+    "effects.compressor.release",
+
     "effects.reverb.time",
     "effects.reverb.decay",
     "effects.reverb.reverse",
@@ -220,7 +227,7 @@ const propertyKeyMap = [
     "effects.delay.time",
     "effects.delay.feedback",
 
-    "effects.unison.voices",
+    "effects.unison._voices",
     "effects.unison.detune",
     "effects.unison.blend",
     "effects.unison.mode",

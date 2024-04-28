@@ -37,12 +37,12 @@ export function useCompressorState(): [State, React.Dispatch<Action>] {
         switch (action.type) {
             case ActionType.initializeForm:
                 return {
-                    disabled: action.payload?.disabled || defaultState.disabled,
-                    threshold: action.payload?.threshold || defaultState.threshold,
-                    knee: action.payload?.knee || defaultState.knee,
-                    ratio: action.payload?.ratio || defaultState.ratio,
-                    attack: action.payload?.attack || defaultState.attack,
-                    release: action.payload?.release || defaultState.release,
+                    disabled: action.payload?.disabled ?? defaultState.disabled,
+                    threshold: action.payload?.threshold ?? defaultState.threshold,
+                    knee: action.payload?.knee ?? defaultState.knee,
+                    ratio: action.payload?.ratio ?? defaultState.ratio,
+                    attack: action.payload?.attack ?? defaultState.attack,
+                    release: action.payload?.release ?? defaultState.release,
                 };
             case ActionType.setForm:
                 return {

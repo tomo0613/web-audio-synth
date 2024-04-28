@@ -22,6 +22,7 @@ const SoundtrackProgress = () => {
 };
 
 const soundTrackListSx: SxProps = {
+    overflow: "auto",
     "& .MuiDivider-root": {
         borderColor: "rgba(0, 0, 0, 0.5)",
     },

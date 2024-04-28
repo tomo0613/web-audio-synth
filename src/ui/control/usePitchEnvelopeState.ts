@@ -34,9 +34,9 @@ export function usePitchEnvelopeState(): [State, React.Dispatch<Action>] {
         switch (action.type) {
             case ActionType.initializeForm:
                 return {
-                    initial: action.payload?.initial || defaultState.initial,
-                    end: action.payload?.end || defaultState.end,
-                    time: action.payload?.time || defaultState.time,
+                    initial: action.payload?.initial ?? defaultState.initial,
+                    end: action.payload?.end ?? defaultState.end,
+                    time: action.payload?.time ?? defaultState.time,
                 };
             case ActionType.setForm:
                 return {

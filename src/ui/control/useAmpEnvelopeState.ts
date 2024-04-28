@@ -35,10 +35,10 @@ export function useAmpEnvelopeState(): [State, React.Dispatch<Action>] {
         switch (action.type) {
             case ActionType.initializeForm:
                 return {
-                    attack: action.payload?.attack || defaultState.attack,
-                    decay: action.payload?.decay || defaultState.decay,
-                    sustain: action.payload?.sustain || defaultState.sustain,
-                    release: action.payload?.release || defaultState.release,
+                    attack: action.payload?.attack ?? defaultState.attack,
+                    decay: action.payload?.decay ?? defaultState.decay,
+                    sustain: action.payload?.sustain ?? defaultState.sustain,
+                    release: action.payload?.release ?? defaultState.release,
                 };
             case ActionType.setForm:
                 return {

@@ -35,8 +35,6 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         try {
             const jsonObject: DataFormat = JSON.parse(jsonString);
 
-            console.log(jsonObject);
-
             const tracks: SoundTrack[] = [];
 
             jsonObject.forEach((trackData) => {
@@ -57,6 +55,8 @@ export const UiContextProvider: React.FC<React.PropsWithChildren> = ({ children 
         } catch (error) {
             console.error(error);
         }
+
+        setTrackSegmentCount(getInitialSegmentCount());
 
         changeListener.dispatch("change");
     }
